@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: JFO Custom Post-Types
-Plugin URI: 
+Plugin URI: http://jorjafox.net
 Description: All CPT code.
 Version: 1.0
 Author: Mika Epstein
