@@ -8,7 +8,9 @@ Author: Mika Epstein
 Author URI: http://www.ipstenu.org/
 */
 
-/* Adding in CPTs */
+/*
+ * This is the video CPT
+ */
 
 //remove_action('init','news_register_post_types', 20);
 add_action( 'init', 'create_jfo_post_types', 25 );
