@@ -11,18 +11,18 @@ Author URI: http://www.ipstenu.org/
 // <iframe src="//instagram.com/p/eBFI8vIiMq/embed/" width="612" height="710" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
 // http://embedresponsively.com/ ?
 
-wp_embed_register_handler( 'instagram', '#http://instagr(\.am|am\.com)/p/([^/]+)#i', 'custom_embed_handler_instagram' ); 
+//wp_embed_register_handler( 'instagram', '#http://instagr(\.am|am\.com)/p/([^/]+)#i', 'custom_embed_handler_instagram' );
 
-function custom_embed_handler_instagram( $matches, $attr, $url, $rawattr ) { 
-  if ( !empty($rawattr['width']) && !empty($rawattr['height']) ) { 
-		$width  = (int) $rawattr['width']; 
-		$height = (int) $rawattr['height']; 
-	} else { 
-		list( $width, $height ) = wp_expand_dimensions( 400, 498, $attr['width'], $attr['height'] ); 
-	} 
+function custom_embed_handler_instagram( $matches, $attr, $url, $rawattr ) {
+  if ( !empty($rawattr['width']) && !empty($rawattr['height']) ) {
+		$width  = (int) $rawattr['width'];
+		$height = (int) $rawattr['height'];
+	} else {
+		list( $width, $height ) = wp_expand_dimensions( 400, 498, $attr['width'], $attr['height'] );
+	}
 
-	return apply_filters( 'embed_instagram', "<iframe src='//instagram.com/p/". esc_attr($matches[2]). "/embed/' width='{$width}' height='{$height}' frameborder='0' scrolling='no' allowtransparency='true'></iframe>" ); 
-} 
+	return apply_filters( 'embed_instagram', "<iframe src='//instagram.com/p/". esc_attr($matches[2]). "/embed/' width='{$width}' height='{$height}' frameborder='0' scrolling='no' allowtransparency='true'></iframe>" );
+}
 
 // Emojii fixes
 // https://core.trac.wordpress.org/ticket/27961
