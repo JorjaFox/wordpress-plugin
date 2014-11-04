@@ -11,7 +11,7 @@ Author URI: http://www.ipstenu.org/
 // <iframe src="//instagram.com/p/eBFI8vIiMq/embed/" width="612" height="710" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
 // http://embedresponsively.com/ ?
 
-//wp_embed_register_handler( 'instagram', '#http://instagr(\.am|am\.com)/p/([^/]+)#i', 'custom_embed_handler_instagram' );
+wp_embed_register_handler( 'instagram', '#http://instagr(\.am|am\.com)/p/([^/]+)#i', 'custom_embed_handler_instagram' );
 
 function custom_embed_handler_instagram( $matches, $attr, $url, $rawattr ) {
   if ( !empty($rawattr['width']) && !empty($rawattr['height']) ) {
