@@ -1,5 +1,4 @@
 <?php
-
 /*
 Plugin Name: Upgrade Control
 Plugin URI:  http://halfelf.org
@@ -12,6 +11,9 @@ Author URI: http://ipstenu.org/
 // auto updates
 define( 'WP_AUTO_UPDATE_CORE', true );
 //define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
+
+// Enable nightlies (dev updates):
+//add_filter( 'allow_dev_auto_core_updates', '__return_true' );
 
 // Force auto plugin updates:
 add_filter( 'auto_update_plugin', '__return_true' );
