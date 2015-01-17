@@ -23,7 +23,7 @@ function jfoads_func( $atts ) {
         'id' => 'paypal',
     ), $atts ) );
 
-     $filename = ABSPATH.'/content/code/ads/'.$id.'.php';
+     $filename = $_SERVER["DOCUMENT_ROOT"].'/content/code/ads/'.$id.'.php';
      if ( !file_exists($filename) ) { return '<!-- Ad would go here, but you messed up! '.$filename.' not found -->'; }
 
      ob_start();
