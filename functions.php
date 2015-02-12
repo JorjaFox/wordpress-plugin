@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: JFO Functions
-Plugin URI: 
+Plugin URI:
 Description: Instead of putting it all in my functions.php, I've made a functional plugin.
 Version: 1.0
 Author: Mika Epstein
@@ -20,7 +20,6 @@ add_filter('the_author_posts_link','yoast_rel_author_filter',10,1);
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
 
 // Media
-
 if ( ! isset( $content_width ) ) $content_width = 600;
 
 add_filter('upload_mimes', 'add_custom_upload_mimes');
@@ -61,3 +60,10 @@ function jfo_rsslinktagger( $guid ) {
 	return $guid;
 }
 add_filter( 'the_permalink_rss', 'jfo_rsslinktagger', 99 );
+
+// RUM tracking
+function jfo_rum_site247_scripts() {
+	wp_enqueue_script( 'jfo_rum_site247_scripts', 'http://jorjafox.net/content/code/js/rum_site247.js', array(), '1.0.0', true );
+}
+
+add_action( 'wp_enqueue_scripts', 'jfo_rum_site247_scripts' );
