@@ -62,8 +62,9 @@ function jfo_rsslinktagger( $guid ) {
 add_filter( 'the_permalink_rss', 'jfo_rsslinktagger', 99 );
 
 // RUM tracking
-function jfo_rum_site247_scripts() {
-	wp_enqueue_script( 'jfo_rum_site247_scripts', 'http://jorjafox.net/content/code/js/rum_site247.js', array(), '1.0.0', true );
+function jfo_rum_scripts() {
+	wp_enqueue_script( 'jfo_rum_site247', 'http://jorjafox.net/content/code/js/rum_site247.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'jfo_rum_pingdom', 'http://jorjafox.net/content/code/js/rum_pingdom.js', array(), '1.0.0', true );
 }
 
-add_action( 'wp_enqueue_scripts', 'jfo_rum_site247_scripts' );
+add_action( 'wp_enqueue_scripts', 'jfo_rum_scripts' );
