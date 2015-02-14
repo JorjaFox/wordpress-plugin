@@ -60,10 +60,3 @@ function jfo_rsslinktagger( $guid ) {
 	return $guid;
 }
 add_filter( 'the_permalink_rss', 'jfo_rsslinktagger', 99 );
-
-// JFO Content Scripts
-function jfo_content_scripts() {
-	wp_enqueue_script( 'jfo_content', 'http://jorjafox.net/content/code/js/jfo-content.min.js', array(), '1.0.0', true );
-}
-
-add_action( 'wp_enqueue_scripts', 'jfo_content_scripts' );
