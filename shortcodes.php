@@ -17,7 +17,7 @@ function crowdrise_func( $atts ) {
 	}
 add_shortcode( 'crowdrise', 'crowdrise_func' );
 
-// JFO Ads [jfoads type="ID"]
+// JFO Ads [jfoads type="name"]
 function jfoads_func( $atts ) {
     extract( shortcode_atts( array(
         'name' => 'default',
