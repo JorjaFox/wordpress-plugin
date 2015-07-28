@@ -8,17 +8,6 @@ Author: Mika Epstein
 Author URI: http://www.ipstenu.org/
 */
 
-// Yoast's fix for Author Links - http://yoast.com/highlighting-wordpress-authors-search/
-function yoast_rel_author_filter( $link ) {
-        if ( false === strpos( $link, 'rel="author"' ) )
-                $link = str_replace ( '<a ', '<a rel="author" ', $link );
-        return $link;
-}
-add_filter('the_author_posts_link','yoast_rel_author_filter',10,1);
-
-//remove auto loading rel=next post link in header
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
-
 // Media
 if ( ! isset( $content_width ) ) $content_width = 600;
 

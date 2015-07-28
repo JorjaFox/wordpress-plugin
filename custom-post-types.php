@@ -12,7 +12,6 @@ Author URI: http://www.ipstenu.org/
  * This is the video CPT
  */
 
-//remove_action('init','news_register_post_types', 20);
 add_action( 'init', 'create_jfo_post_types', 25 );
 
 function create_jfo_post_types() {
@@ -55,7 +54,7 @@ $prefix = 'jfo';
 
 // Adding to Right Now
 add_action( 'dashboard_glance_items', 'jfocpt_right_now' );
-     
+
 function jfocpt_right_now() {
         	foreach ( array( 'video' ) as $post_type ) {
         		$num_posts = wp_count_posts( $post_type );

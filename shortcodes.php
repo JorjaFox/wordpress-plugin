@@ -17,17 +17,17 @@ function crowdrise_func( $atts ) {
 	}
 add_shortcode( 'crowdrise', 'crowdrise_func' );
 
-// JFO Ads [jfoads type="ID"]
+// JFO Ads [jfoads id=liquidweb-325x38]
 function jfoads_func( $atts ) {
     extract( shortcode_atts( array(
-        'name' => 'default',
+        'id' => 'default',
     ), $atts ) );
 
     ob_start();
-    	$_GET['name'] = $name;
+    	$_GET['name'] = $id;
 	include("/home/jorjafox/public_html/content/code/ads/adboxes.php");
 	$content = ob_get_clean();
-    return '<div id="'.$name.'">'.$content.'</div>';
+    return '<div id="'.$id.'">'.$content.'</div>';
 }
 
 add_shortcode( 'jfoads', 'jfoads_func' );

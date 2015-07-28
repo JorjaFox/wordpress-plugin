@@ -4,7 +4,7 @@
  * Plugin URI: http://github.com/georgestephanis/object-cache-flusher-button/
  * Description: This plugin adds a button to the adminbar that simply flushes the object cache.
  * Author: George Stephanis
- * Version: 1.0
+ * Version: 1.0.1
  * Author URI: http://stephanis.info
  */
 
@@ -19,11 +19,10 @@ function object_cache_flusher_button( $wp_admin_bar ) {
 	$query_args = array(
 		'action' => 'flush_object_cache',
 	);
-	$url = add_query_arg( $query_args, admin_url( 'index.php' ) );
 	$wp_admin_bar->add_node( array(
 		'id'     => 'object-cache-flusher-button',
 		'title'  => __( 'Flush Cache' ),
-		'href'   => wp_nonce_url( $url, 'object-cache-flush' ),
+		'href' => wp_nonce_url( add_query_arg('flush_cache', 1), 'object-cache-flush'),
 		'parent' => 'top-secondary',
 	) );
 }
