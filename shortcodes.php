@@ -20,16 +20,14 @@ add_shortcode( 'crowdrise', 'crowdrise_func' );
 // JFO Ads [jfoads type="ID"]
 function jfoads_func( $atts ) {
     extract( shortcode_atts( array(
-        'id' => 'paypal',
+        'name' => 'default',
     ), $atts ) );
 
-     $filename = $_SERVER["DOCUMENT_ROOT"].'/content/code/ads/'.$id.'.php';
-     if ( !file_exists($filename) ) { return '<!-- Ad would go here, but you messed up! '.$filename.' not found -->'; }
-
-     ob_start();
-     include($filename);
-     $content = ob_get_clean();
-     return '<div id="'.$id.'">'.$content.'</div>';
+    ob_start();
+    	$_GET['name'] = $name;
+	include("/home/jorjafox/public_html/content/code/ads/adboxes.php");
+	$content = ob_get_clean();
+    return '<div id="'.$name.'">'.$content.'</div>';
 }
 
 add_shortcode( 'jfoads', 'jfoads_func' );
