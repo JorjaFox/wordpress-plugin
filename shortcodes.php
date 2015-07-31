@@ -3,7 +3,7 @@
 Plugin Name: JFO Shortcodes Stuff
 Plugin URI:
 Description: Shortcodes etc
-Version: 1.0
+Version: 1.1
 Author: Mika Epstein
 Author URI: http://www.ipstenu.org/
 */
