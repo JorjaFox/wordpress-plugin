@@ -27,7 +27,7 @@ function jfoads_func( $atts ) {
     	$_GET['name'] = $id;
 	include("/home/jorjafox/public_html/content/code/ads/adboxes.php");
 	$content = ob_get_clean();
-    return '<div id="'.$id.'">'.$content.'</div>';
+    return $content;
 }
 
 add_shortcode( 'jfoads', 'jfoads_func' );
