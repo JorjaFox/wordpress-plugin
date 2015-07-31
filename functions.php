@@ -3,7 +3,7 @@
 Plugin Name: JFO Functions
 Plugin URI:
 Description: Instead of putting it all in my functions.php, I've made a functional plugin.
-Version: 1.0
+Version: 1.0.1
 Author: Mika Epstein
 Author URI: http://www.ipstenu.org/
 */

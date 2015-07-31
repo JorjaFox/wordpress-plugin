@@ -3,7 +3,7 @@
 Plugin Name: JFO Shortcodes Stuff
 Plugin URI:
 Description: Shortcodes etc
-Version: 1.0
+Version: 1.1
 Author: Mika Epstein
 Author URI: http://www.ipstenu.org/
 */
@@ -27,7 +27,7 @@ function jfoads_func( $atts ) {
     	$_GET['name'] = $id;
 	include("/home/jorjafox/public_html/content/code/ads/adboxes.php");
 	$content = ob_get_clean();
-    return '<div id="'.$id.'">'.$content.'</div>';
+    return $content;
 }
 
 add_shortcode( 'jfoads', 'jfoads_func' );
