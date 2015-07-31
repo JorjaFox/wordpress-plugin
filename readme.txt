@@ -2,7 +2,7 @@
 
 All MU-PLUGINS for Jorja Fox: Online
 
-Version 1.0.1
+Version 1.0.2
 
 ## Code
 
