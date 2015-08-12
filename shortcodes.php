@@ -25,7 +25,7 @@ function jfoads_func( $atts ) {
 
     ob_start();
     	$_GET['name'] = $id;
-	include("/home/jorjafox/public_html/content/code/ads/adboxes.php");
+	include("/home/jorjafox/public_html/static/content/code/ads/adboxes.php");
 	$content = ob_get_clean();
     return $content;
 }
