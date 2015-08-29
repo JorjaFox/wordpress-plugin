@@ -16,3 +16,7 @@ Version 1.0.3
 ## License
 
 GPLv2
+
+## Notes
+
+Don't fuck this up
