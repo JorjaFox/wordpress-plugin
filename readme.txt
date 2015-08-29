@@ -6,7 +6,6 @@ Version 1.0.3
 
 ## Code
 
-- **cache-buster-button** - George's cache buster
 - **custom-post-types** - Custom Post Types (just video)
 - **functions** - Sitewide functions
 - **shortcodes** - Shortcodes
