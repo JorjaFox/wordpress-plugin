@@ -10,7 +10,9 @@ Author URI: http://www.ipstenu.org/
 
 // Filter HTML into videos
 
-//function jfo_oembed_filter($html, $url, $attr) {
+/* Adjust WP Defaults */
+
+// Filter Videos and wrap in a class:
 function jfo_oembed_filter($html) {
 	$html = "<div class='responsive-oembed'>".$html."</div>";
     return $html;
@@ -18,6 +20,13 @@ function jfo_oembed_filter($html) {
 add_filter( 'embed_oembed_html', 'jfo_oembed_filter', 10, 3 );
 add_filter( 'video_embed_html', 'jfo_oembed_filter', 10, 3 );
 
+// Make a new embed size
+function wpse_76102_new_embed_size() {
+    return array( 'width' => 1000, 'height' => 600 );
+}
+add_filter( 'embed_defaults', 'wpse_76102_new_embed_size' );
+
+// Filter video shortcode and add a link if there's an MP4
 function jfo_video_shortcode($html, $attr, $video, $post_id, $library) {
 
 	if ( !empty( $attr['mp4'] ) )
