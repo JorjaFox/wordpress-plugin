@@ -22,7 +22,7 @@ add_filter( 'video_embed_html', 'jfo_oembed_filter', 10, 3 );
 
 // Make a new embed size
 function wpse_76102_new_embed_size() {
-    return array( 'width' => 1000, 'height' => 600 );
+    return array( 'width' => 650 );
 }
 add_filter( 'embed_defaults', 'wpse_76102_new_embed_size' );
 
