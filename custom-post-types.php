@@ -10,9 +10,10 @@ Author URI: http://www.ipstenu.org/
 
 /*
  * This is the video CPT
+ * Currently it's disabled. Uncomment line 16 to add back in.
  */
 
-add_action( 'init', 'create_jfo_post_types', 25 );
+//add_action( 'init', 'create_jfo_post_types', 25 );
 
 function create_jfo_post_types() {
 
