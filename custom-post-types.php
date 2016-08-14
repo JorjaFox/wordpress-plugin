@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: JFO Custom Post-Types
-Plugin URI: http://jorjafox.net
+Plugin URI: https://jorjafox.net
 Description: All CPT code.
 Version: 1.0
 Author: Mika Epstein
-Author URI: http://www.ipstenu.org/
+Author URI: https://www.ipstenu.org/
 */
 
 /*
