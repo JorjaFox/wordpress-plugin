@@ -13,12 +13,12 @@ Author URI: http://www.ipstenu.org/
 /* Adjust WP Defaults */
 
 // Filter Videos and wrap in a class:
-function jfo_oembed_filter($html) {
+function flf_oembed_filter($html) {
 	$html = "<div class='responsive-oembed'>".$html."</div>";
     return $html;
 }
-add_filter( 'embed_oembed_html', 'jfo_oembed_filter', 10, 3 );
-add_filter( 'video_embed_html', 'jfo_oembed_filter', 10, 3 );
+add_filter( 'embed_oembed_html', 'flf_oembed_filter', 10, 3 );
+add_filter( 'video_embed_html', 'flf_oembed_filter', 10, 3 );
 
 // Make a new embed size
 function wpse_76102_new_embed_size() {
@@ -27,7 +27,7 @@ function wpse_76102_new_embed_size() {
 add_filter( 'embed_defaults', 'wpse_76102_new_embed_size' );
 
 // Filter video shortcode and add a link if there's an MP4
-function jfo_video_shortcode($html, $attr, $video, $post_id, $library) {
+function flf_video_shortcode($html, $attr, $video, $post_id, $library) {
 
 	if ( !empty( $attr['mp4'] ) )
 	{
@@ -36,17 +36,17 @@ function jfo_video_shortcode($html, $attr, $video, $post_id, $library) {
 
 	return $html;
 }
-add_filter( 'wp_video_shortcode', 'jfo_video_shortcode', 10, 5);
+add_filter( 'wp_video_shortcode', 'flf_video_shortcode', 10, 5);
 
 
 // Otto's CBS Fix
 
-function cbscom_embed_register_handler() {
-  wp_embed_register_handler( 'cbscom', '|https?://www.cbs.com/shows/.*|i', 'cbscom_embed_handler' );
+function flf_cbscom_embed_register_handler() {
+  wp_embed_register_handler( 'cbscom', '|https?://www.cbs.com/shows/.*|i', 'flf_cbscom_embed_handler' );
 }
-add_action( 'init', 'cbscom_embed_register_handler' );
+add_action( 'init', 'flf_cbscom_embed_register_handler' );
 
-function cbscom_embed_handler( $matches, $attr, $url, $rawattr ) {
+function flf_cbscom_embed_handler( $matches, $attr, $url, $rawattr ) {
 	global $post, $wp_embed;
 
 	// no post, no worky
@@ -133,9 +133,9 @@ function cbscom_embed_handler( $matches, $attr, $url, $rawattr ) {
  * Usually for crap like TV Guide
  * Example: [ooyala video_pcode="VlajQ6DTdv9-OYPHSJq6w4eU0Bfi" width="222" embedCode="NwdzM3aDp4BB3-MEdPemlMJK5XH7ZVdn"]
  */
-add_shortcode( 'ooyala', 'ooyala_shortcode' );
+add_shortcode( 'ooyala', 'flf_ooyala_shortcode' );
 
-function ooyala_shortcode( $atts ) {
+function flf_ooyala_shortcode( $atts ) {
 	extract(shortcode_atts(array(
 		'width' => '500',
 		'video_pcode' => '',

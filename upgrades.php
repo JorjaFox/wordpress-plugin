@@ -13,13 +13,13 @@ Author URI: http://ipstenu.org/
 define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
 
 // Enable nightlies (dev updates):
-//add_filter( 'allow_dev_auto_core_updates', '__return_true' );
+add_filter( 'allow_dev_auto_core_updates', '__return_true' );
 
 // Force auto plugin updates:
-//add_filter( 'auto_update_plugin', '__return_true' );
+add_filter( 'auto_update_plugin', '__return_true' );
 
 // Force auto theme updates
-//add_filter( 'auto_update_theme', '__return_true' );
+add_filter( 'auto_update_theme', '__return_true' );
 
 // Suspend or force emails (false == no email ; true == yes email)
 add_filter( 'auto_core_update_send_email', '__return_true', 1 );

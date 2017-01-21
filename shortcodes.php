@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: JFO Shortcodes Stuff
+Plugin Name: Fans of LeFox Shortcodes Stuff
 Plugin URI:
 Description: Shortcodes etc
 Version: 1.1
@@ -9,16 +9,16 @@ Author URI: http://www.ipstenu.org/
 */
 
 // Crowdrise [crowdrise id="ID"]
-function crowdrise_func( $atts ) {
+function flf_crowdrise_func( $atts ) {
 	extract( shortcode_atts( array(
 		'id' => 'stupidcancer',
 	), $atts ) );
 	return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/'.$id.'/"></script>';
 	}
-add_shortcode( 'crowdrise', 'crowdrise_func' );
+add_shortcode( 'crowdrise', 'flf_crowdrise_func' );
 
 // JFO Ads [jfoads id=liquidweb-325x38]
-function jfoads_func( $atts ) {
+function flf_ads_func( $atts ) {
     extract( shortcode_atts( array(
         'id' => 'default',
     ), $atts ) );
@@ -30,12 +30,12 @@ function jfoads_func( $atts ) {
     return $content;
 }
 
-add_shortcode( 'jfoads', 'jfoads_func' );
+add_shortcode( 'jfoads', 'flf_ads_func' );
 
 // Year
 
-function jfo_year_shortcode() {
+function flf_year_shortcode() {
   $year = date('Y');
   return $year;
 }
-add_shortcode('year', 'jfo_year_shortcode');
+add_shortcode('year', 'flf_year_shortcode');

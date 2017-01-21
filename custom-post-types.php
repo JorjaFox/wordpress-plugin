@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: JFO Custom Post-Types
+Plugin Name: Fans of LeFox Custom Post-Types
 Plugin URI: https://jorjafox.net
 Description: All CPT code.
 Version: 1.0
