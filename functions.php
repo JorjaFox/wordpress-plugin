@@ -8,6 +8,10 @@ Author: Mika Epstein
 Author URI: https://ipstenu.org/
 */
 
+// Disable JSON
+add_filter('json_enabled', '__return_false');
+add_filter('json_jsonp_enabled', '__return_false');
+
 // Media
 if ( ! isset( $content_width ) ) $content_width = 600;
 
