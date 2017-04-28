@@ -21,7 +21,7 @@ class FLF_MU_Plugins {
 		$theme = wp_get_theme(); // gets the current theme
 
 		if ( 'Utility Pro' == $theme->name ) {
-			include_once( dirname( __FILE__ ) . '/themes/utility-pro.php' );
+			include_once( dirname( __FILE__ ) . '/utility-pro/functions.php' );
 		}
 
 		add_filter( 'upload_mimes', array( $this, 'upload_mimes' ) );

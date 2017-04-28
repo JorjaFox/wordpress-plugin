@@ -34,11 +34,11 @@ class FLF_Utility_Pro {
 	}
 
 	function enqueue_scripts() {
-		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/themes/utility-pro.css' );
+		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css' );
 		wp_enqueue_script( 'content', 'https://static.jorjafox.net/content/code/js/content.min.js', array(), '1.3.1', true );
 		wp_dequeue_script( 'utility-pro-backstretch-args' );
 		wp_dequeue_script( 'utility-pro-fonts' );
-		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/themes/backstretch.args.js', array( 'utility-pro-backstretch' ), '1.3.1', true );
+		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), '1.3.1', true );
 	}
 
 	function more_link_text() {
