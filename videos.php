@@ -53,7 +53,7 @@ class FLF_Videos {
 	 * @return void
 	 */
 	function cbscom_embed_register_handler() {
-	  wp_embed_register_handler( 'cbscom', '|https?://www.cbs.com/shows/.*|i', array( $this, 'cbscom_embed_handler' );
+	  wp_embed_register_handler( 'cbscom', '|https?://www.cbs.com/shows/.*|i', array( $this, 'cbscom_embed_handler' ) ) ;
 	}
 
 	/**
@@ -66,7 +66,7 @@ class FLF_Videos {
 	 * @param mixed $rawattr
 	 * @return void
 	 */
-	function flf_cbscom_embed_handler( $matches, $attr, $url, $rawattr ) {
+	function cbscom_embed_handler( $matches, $attr, $url, $rawattr ) {
 		global $post, $wp_embed;
 
 		// no post, no worky
