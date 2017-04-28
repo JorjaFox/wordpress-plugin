@@ -1,4 +1,4 @@
-# JFO MU Plugins
+# Fans of LeFox MU Plugins
 
 All MU-PLUGINS for Jorja Fox: Online
 
