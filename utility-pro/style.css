@@ -40,6 +40,10 @@ h3 {
 	font-family: "Antenna", Arial, Helvetica, sans-serif;
 }
 
+.jetpack_subscription_widget h3.widgettitle.widget-title {
+	color: #ffffff;
+}
+
 /* Utility Bar */
 
 .utility-pro-green .utility-bar {
