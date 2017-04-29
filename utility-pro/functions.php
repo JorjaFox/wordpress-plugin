@@ -25,26 +25,56 @@ class FLF_Utility_Pro {
 		add_filter( 'the_content_more_link', array( $this, 'more_link_text' ) );
 		add_filter( 'excerpt_more', array( $this, 'more_link_text' ) );
 		add_filter( 'admin_post_thumbnail_html', array( $this, 'admin_post_thumbnail_html' ) );
-		add_filter( 'script_loader_src', array( $this, 'remove_script_version' ), 15, 1 );
-		add_filter( 'style_loader_src', array( $this, 'remove_script_version' ), 15, 1 );
 		add_filter( 'genesis_title_comments', array( $this, 'genesis_title_comments' ) );
 		add_filter( 'genesis_comment_list_args', array( $this, 'comment_list_args' ) );
 		add_filter( 'comment_form_defaults', array( $this, 'comment_form_defaults' ) );
 		add_filter( 'genesis_footer_creds_text', array( $this, 'footer_creds' ), 99 );
+
+		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
+		add_filter( 'genesis_post_info', array( $this, 'genesis_post_info' ) );
 	}
 
+	/**
+	 * Enqueue scripts and styles
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function enqueue_scripts() {
 		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css' );
 		wp_enqueue_script( 'content', 'https://static.jorjafox.net/content/code/js/content.min.js', array(), '1.3.1', true );
-		wp_dequeue_script( 'utility-pro-backstretch-args' );
 		wp_dequeue_script( 'utility-pro-fonts' );
+
+		// Load Backstretch scripts only if custom background is being used
+		if ( ! get_background_image() ) {
+			return;
+		}
+
+		// Re-enqueue becuase we want this on all pages (sorry, Carrie)
+		wp_enqueue_script( 'utility-pro-backstretch', get_stylesheet_directory_uri() . '/js/backstretch.min.js', array( 'jquery' ), '2.0.1', true );
+
+		wp_dequeue_script( 'utility-pro-backstretch-args' );
 		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), '1.3.1', true );
+
+		wp_localize_script( 'utility-pro-backstretch-args', 'utilityBackstretchL10n', array( 'src' => get_background_image() ) );
 	}
 
+	/**
+	 * Customize Read More.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function more_link_text() {
 		return '&#x02026; <a class="more-link" href="'. get_permalink( get_the_ID() ) . '">[' . genesis_a11y_more_link( 'Continue Reading' ) . ']</a>';
 	}
 
+	/**
+	 * Customize read-more after entry
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function genesis_after_entry_content() {
 		global $post;
 		if ( has_excerpt( $post->ID ) && !is_singular() ) {
@@ -52,21 +82,29 @@ class FLF_Utility_Pro {
 		}
 	}
 
+	/**
+	 * Display sizes for featured images so I don't forget.
+	 *
+	 * @access public
+	 * @param mixed $content
+	 * @return void
+	 */
 	function admin_post_thumbnail_html( $content ) {
-
-		// Get featured image size
 		global $_wp_additional_image_sizes;
 
 		$featured_image = $_wp_additional_image_sizes['feature-large']['width'].'x'.$_wp_additional_image_sizes['feature-large']['height'];
-
-		// Apply
-		$imagesize = '<p>Image Size:' . $featured_image . ' px</p>';
-		$content = $imagesize . $content;
+		$imagesize      = '<p>Image Size:' . $featured_image . ' px</p>';
+		$content        = $imagesize . $content;
 
 		return $content;
-
 	}
 
+	/**
+	 * Custom Header Code
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function header() {
 	    include( FLF_STATIC_CONTENT . '/static/content/code/ads/loader.php' );
 		include( FLF_STATIC_CONTENT . '/static/content/code/analyticstracking.php' );
@@ -78,34 +116,38 @@ class FLF_Utility_Pro {
 	    <?php
 	}
 
-	// Remove Query strings from Static Resources.
-	function remove_script_version( $src ){
-	    $parts = explode( '?', $src );
-	    return $parts[0];
-	}
-
-
-	/*
-	 * Comment Section
+	/**
+	 * Modify name of comments section
+	 *
+	 * @access public
+	 * @return void
 	 */
-
-	// Modify comments title text in comments
-
-
 	function genesis_title_comments() {
 		$title = '<h3>Discussion:</h3>';
 		return $title;
 	}
 
-	// Customize Comments for avatar size and MY callback
-
-
+	/**
+	 * Customize Comments for avatar size and MY callback.
+	 *
+	 * @access public
+	 * @param mixed $args
+	 * @return void
+	 */
 	function comment_list_args($args) {
 	        $args['callback'] = 'comment_callback';
 	        return $args;
 	}
 
-	// replace comment callback with my own
+	/**
+	 * replace comment callback with my own.
+	 *
+	 * @access public
+	 * @param mixed $comment
+	 * @param mixed $args
+	 * @param mixed $depth
+	 * @return void
+	 */
 	function comment_callback( $comment, $args, $depth ) {
 
 		$GLOBALS['comment'] = $comment;
@@ -128,15 +170,15 @@ class FLF_Utility_Pro {
 					<span class="jf-title">
 						<?php
 						if ( user_can( $comment->user_id, 'administrator' ) ) {
-							?><span class="screen-reader-text">Administrator</span><?php
+							$userrole = 'Administrator';
 						} elseif ( $comment->user_id === $post->post_author ) {
-							?><span class="screen-reader-text">Post Author</span><?php
+							$userrole = 'Post Author';
 						} elseif ( user_can( $comment->user_id, 'editor' ) ) {
-							?><span class="screen-reader-text">Moderator</span><?php
+							$userrole = 'Moderator';
 						} else {
-							?><span class="screen-reader-text">Member</span><?php
+							$userrole = 'Member';
 						}
-						?>
+						?><span class="screen-reader-text"><?php echo $userrole; ?></span>
 					</span>
 
 					<?php printf( '<cite><span class="fn">%1$s</span></cite> <span class="says">%2$s:</span>',
@@ -164,33 +206,49 @@ class FLF_Utility_Pro {
 		/** No ending </li> tag because of comment threading */
 	}
 
+	/**
+	 * Default settings for comment form.
+	 *
+	 * @access public
+	 * @param mixed $defaults
+	 * @return void
+	 */
 	function comment_form_defaults( $defaults ) {
 		$defaults['comment_notes_after'] = '';
 		return $defaults;
 	}
 
-	// Comment Policy
+	/**
+	 * Comment Policy.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function before_comment_form_policy() {
 
 		if ( is_single() && comments_open() ) {
 		    ?>
 		    <div class="comment-policy-box entry-comments">
-		        <p class="comment-policy"><strong>Comment Policy:</strong> By posting a comment, you agree to our <a href="https://jorjafox.net/terms-of-use/">Terms of Use</a> and promise to abide by our <a href="https://jorjafox.net/policy/">Policies</a>. Violations will result in posts being deleted, moderated, or banned. If you want your own avatar, register at <a href="http://gravatar.com">Gravatar</a> with the email you use when commenting.</p>
+		        <p class="comment-policy"><strong>Comment Policy:</strong> By posting a comment, you agree to our <a href="https://jorjafox.net/terms-of-use/">Terms of Use</a> and promise to abide by our <a href="https://jorjafox.net/policy/">Policies</a>. Violations will result in posts being deleted, moderated, or banned. To create your own custom avatar, please register at <a href="http://gravatar.com">Gravatar</a> with the email address you use when commenting.</p>
 		</div>
 			<?php
 		}
 	}
 
-
-	// Ads below comment form
+	/**
+	 * Display ads before comments.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	function before_comments_ads() {
 	    echo '<div class="adboxes-footerwidget">'.do_shortcode('[jfoads id=google-large-rectangle]').do_shortcode('[jfoads id=studiopress-120x240]').do_shortcode('[jfoads id=line-buttons-500x250]').'</div>';
 	}
 
-
 	/**
 	 * Change the footer text.
 	 *
+	 * @access public
 	 * @param string $creds Existing credentials.
 	 * @return string Footer credentials, as shortcodes.
 	 */
@@ -198,6 +256,29 @@ class FLF_Utility_Pro {
 		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a></p><div class="adboxes-footer">[jfoads id=leaderboard-728x90]</div>';
 	}
 
+	/**
+	 * Filter post info.
+	 *
+	 * @access public
+	 * @param mixed $post_info
+	 * @return void
+	 */
+	function genesis_post_info( $post_info = '' ) {
+		if ( is_singular( array ( 'videos', 'page' ) ) )
+			$post_info = 'By the Fans of Le Fox Librarians [post_edit]';
+		return $post_info;
+	}
+
+	/**
+	 * Filter headers so pages show post info.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function genesis_entry_header() {
+		$post_info = $this->genesis_post_info();
+		if ( is_page() ) printf( '<p class="entry-meta">%s</p>', do_shortcode( $post_info ) );
+	}
 
 	/**
 	 * Theme setup.
@@ -205,6 +286,7 @@ class FLF_Utility_Pro {
 	 * Attach all of the site-wide functions to the correct hooks and filters. All
 	 * the functions themselves are defined below this setup function.
 	 *
+	 * @access public
 	 */
 	function theme_setup() {
 
@@ -214,26 +296,26 @@ class FLF_Utility_Pro {
 		// Add another image size
 	 	add_image_size( 'feature-med', 661, 228, true );
 
-		/**
-		 * Hook after post widget area after post content
-		 */
-
-		// Register side-up-bit area
+		// Register new widget areas
 		genesis_register_sidebar( array(
 			'id'            => 'slide-up-bit',
 			'name'          => __( 'Slide Up Bit', 'jfgenesis' ),
 			'description'   => __( 'This is a widget area that slides up.', 'jfgenesis' ),
 		) );
 
-		//
-		add_action( 'genesis_after_footer', 'slide_up_bit' );
-
+		/**
+		 * Widget area for slide-up-bit.
+		 *
+		 * @access public
+		 * @return void
+		 */
 		function slide_up_bit() {
 		    genesis_widget_area( 'slide-up-bit', array(
 		        'before' => '<div id="bit" class=""><a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow Us</span></a><div id="bitsubscribe">',
 		        'after' => '</div></div>',
 			) );
 		}
+		add_action( 'genesis_after_footer', 'slide_up_bit' );
 	}
 }
 
