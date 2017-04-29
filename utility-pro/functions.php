@@ -327,8 +327,11 @@ class FLF_Utility_Pro {
 	}
 
 
-	function genesis_post_meta($post_meta) {
-		$this->post_meta_footer();
+	function genesis_post_meta( $post_meta = '' ) {
+		if ( is_singular( array( 'videos', 'post', 'pages' ) ) )
+			$post_meta = '[post_categories] [post_tags]' . $this->post_meta_footer();
+
+		return $post_meta;
 	}
 }
 
