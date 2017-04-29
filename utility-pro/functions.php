@@ -32,6 +32,8 @@ class FLF_Utility_Pro {
 
 		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
 		add_filter( 'genesis_post_info', array( $this, 'genesis_post_info' ) );
+
+		add_filter( 'genesis_post_meta', array( $this, 'genesis_post_meta' ) );
 	}
 
 	/**
@@ -316,6 +318,17 @@ class FLF_Utility_Pro {
 			) );
 		}
 		add_action( 'genesis_after_footer', 'slide_up_bit' );
+	}
+
+	public function post_meta_footer() {
+		?>
+		<footer class="entry-footer"><p class="entry-meta">Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse content (including images and videos) from this site for your own use, commercial or otherwise, provided you credit this site in some way (via a link back, or simply by mentioning us by name).</p></footer>
+		<?php
+	}
+
+
+	function genesis_post_meta($post_meta) {
+		$this->post_meta_footer();
 	}
 }
 

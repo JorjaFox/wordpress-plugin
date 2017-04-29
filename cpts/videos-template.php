@@ -22,7 +22,7 @@ function flf_videos_before_loop() {
 
 add_action( 'genesis_after_loop', 'flf_videos_after_loop', 12);
 function flf_videos_after_loop() {
-		FLF_CPT_Videos::video_footer();
+		FLF_Utility_Pro::post_meta_footer();
 	?>
 	</article>
 	<?php

@@ -18,8 +18,6 @@ class FLF_CPT_Videos {
 
 		add_action( 'init', array( $this, 'create_post_type' ), 0 );
 		add_action( 'init', array( $this, 'create_taxonomies' ), 0 );
-
-		add_filter( 'genesis_post_meta', array( $this, 'genesis_post_meta' ) );
 	}
 
 	/**
@@ -162,17 +160,6 @@ class FLF_CPT_Videos {
 				printf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', $post_type, $text );
 			}
 		}
-	}
-
-	public function video_footer() {
-		?>
-		<footer class="entry-footer"><p class="entry-meta">Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse videos on this site for your own use, provided you credit this site in some way (via a link back, or simply by mentioning us by name).</p></footer>
-		<?php
-	}
-
-
-	function genesis_post_meta($post_meta) {
-		$this->video_footer();
 	}
 
 }
