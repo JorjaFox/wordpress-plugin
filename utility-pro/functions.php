@@ -322,14 +322,14 @@ class FLF_Utility_Pro {
 
 	public function post_meta_footer() {
 		?>
-		<footer class="entry-footer"><p class="entry-meta">Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse content (including images and videos) from this site for your own use, commercial or otherwise, provided you credit this site in some way (via a link back, or simply by mentioning us by name).</p></footer>
+		<footer class="entry-footer"><p class="entry-meta">Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse videos from this site provided you credit this site in some way (via a link back, or simply by mentioning us by name).</p></footer>
 		<?php
 	}
 
 
 	function genesis_post_meta( $post_meta = '' ) {
-		if ( is_singular( array( 'videos', 'post', 'pages' ) ) )
-			$post_meta = '[post_categories] [post_tags]' . $this->post_meta_footer();
+		if ( is_singular( array( 'videos' ) ))
+			$this->post_meta_footer();
 
 		return $post_meta;
 	}

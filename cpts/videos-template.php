@@ -38,8 +38,8 @@ function flf_videos_loop() {
 		genesis_get_custom_field( 'query_args' ),
 			array(
 				'post_type'      => 'videos',
-				'orderby'        => 'date',
-				'order'          => 'DESC',
+				'orderby'        => 'title',
+				'order'          => 'ASC',
 				'posts_per_page' => '24',
 				'paged'          => $paged, // respect pagination
 			)

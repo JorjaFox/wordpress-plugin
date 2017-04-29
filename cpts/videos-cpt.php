@@ -65,7 +65,7 @@ class FLF_CPT_Videos {
 			'menu_icon'           => 'dashicons-video-alt',
 			'menu_position'       => 7,
 			'can_export'          => true,
-			'has_archive'         => false,
+			'has_archive'         => true,
 			'exclude_from_search' => false,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
