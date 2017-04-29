@@ -137,7 +137,7 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function comment_list_args($args) {
-	        $args['callback'] = 'comment_callback';
+	        $args['callback'] = $this->comment_callback;
 	        return $args;
 	}
 
