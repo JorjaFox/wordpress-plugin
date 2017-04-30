@@ -18,7 +18,7 @@ class FLF_Utility_Pro {
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 12 );
 		add_action( 'genesis_setup', array( $this, 'theme_setup' ), 20 );
 		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
 		add_action( 'genesis_after_entry_content', array( $this, 'genesis_after_entry_content' ), 15 );
@@ -46,7 +46,7 @@ class FLF_Utility_Pro {
 	 */
 	function enqueue_scripts() {
 		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css' );
-		wp_enqueue_script( 'content', 'https://static.jorjafox.net/content/code/js/content.min.js', array(), '1.3.1', true );
+		wp_enqueue_script( 'content', 'https://static.jorjafox.net/content/code/js/slide-up.js', array(), '1.3.1', true );
 		wp_dequeue_script( 'utility-pro-fonts' );
 
 		// Load Backstretch scripts only if custom background is being used
