@@ -167,6 +167,13 @@ div.footer-widgets svg:hover {
 	height: 53px!important;
 }
 
+/* Widgets
+--------------------------------------------- */
+
+section#text-15 div.widget-wrap {
+	border-top: none!important;
+}
+
 /* Posts
 --------------------------------------------- */
 
@@ -331,6 +338,11 @@ div.albumdesc h3 {
 	font-weight: bold;
 	font-size: 18px;
 	text-align: center;
+}
+
+.entry-meta-copyright {
+	color: #545454;
+	font-size: 14px;
 }
 
 /* Embed padding */

@@ -15,25 +15,27 @@ class FLF_Utility_Pro {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'genesis_after_entry_content', array( $this, 'genesis_after_entry_content' ), 15 );
+
+		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'genesis_setup', array( $this, 'theme_setup' ), 20 );
+		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
+		add_action( 'genesis_after_entry_content', array( $this, 'genesis_after_entry_content' ), 15 );
 		add_action( 'genesis_before_comment_form', array( $this, 'before_comment_form_policy' ) );
 		add_action( 'genesis_before_comments', array( $this, 'before_comments_ads' ) );
-		add_action( 'genesis_setup', array( $this, 'theme_setup' ), 20 );
 
-		add_filter( 'the_content_more_link', array( $this, 'more_link_text' ) );
-		add_filter( 'excerpt_more', array( $this, 'more_link_text' ) );
+		// Filters
 		add_filter( 'admin_post_thumbnail_html', array( $this, 'admin_post_thumbnail_html' ) );
+		add_filter( 'excerpt_more', array( $this, 'more_link_text' ) );
+		add_filter( 'the_content_more_link', array( $this, 'more_link_text' ) );
+		add_filter( 'genesis_attr_content', array( $this, 'custom_facetwp_class' ) );
+		add_filter( 'genesis_post_info', array( $this, 'genesis_post_info' ) );
+		add_filter( 'genesis_post_meta', array( $this, 'genesis_post_meta' ) );
 		add_filter( 'genesis_title_comments', array( $this, 'genesis_title_comments' ) );
 		add_filter( 'genesis_comment_list_args', array( $this, 'comment_list_args' ) );
 		add_filter( 'comment_form_defaults', array( $this, 'comment_form_defaults' ) );
 		add_filter( 'genesis_footer_creds_text', array( $this, 'footer_creds' ), 99 );
-
-		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
-		add_filter( 'genesis_post_info', array( $this, 'genesis_post_info' ) );
-
-		add_filter( 'genesis_post_meta', array( $this, 'genesis_post_meta' ) );
 	}
 
 	/**
@@ -255,7 +257,7 @@ class FLF_Utility_Pro {
 	 * @return string Footer credentials, as shortcodes.
 	 */
 	function footer_creds( $creds ) {
-		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a></p><div class="adboxes-footer">[jfoads id=leaderboard-728x90]</div>';
+		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a> & <a href="http://helf.us/genesis/">Genesis Framework</a>.<br />Hosted by <a href="https://liquidweb.evyy.net/c/294289/297312/4464">Liquidweb</a>.</p><div class="adboxes-footer">[jfoads id=leaderboard-728x90]</div>';
 	}
 
 	/**
@@ -320,18 +322,48 @@ class FLF_Utility_Pro {
 		add_action( 'genesis_after_footer', 'slide_up_bit' );
 	}
 
-	public function post_meta_footer() {
-		?>
-		<footer class="entry-footer"><p class="entry-meta">Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse videos from this site provided you credit this site in some way (via a link back, or simply by mentioning us by name).</p></footer>
-		<?php
+	/**
+	 * Custom Post Meta
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function post_meta_footer( $type = '' ) {
+
+		switch ( $type ) {
+			case 'videos':
+				$text = 'Per our <a href="/copyrights/">Copyrights</a> and <a href="/terms-of-use/">Terms of Use</a>, you are welcome to copy and reuse videos from this site provided you credit this site in some way (via a link back, or simply by mentioning us by name).';
+				break;
+			default:
+				$text = '';
+		}
+
+		return $text;
 	}
 
-
+	/**
+	 * Footer Meta
+	 *
+	 * @access public
+	 * @param string $post_meta (default: '')
+	 * @return void
+	 */
 	function genesis_post_meta( $post_meta = '' ) {
 		if ( is_singular( array( 'videos' ) ))
-			$this->post_meta_footer();
-
+			$post_meta = '[post_terms taxonomy="video_subjects"]</p><p class="entry-meta-copyright">' . $this->post_meta_footer( 'videos' );
 		return $post_meta;
+	}
+
+	/**
+	 * Add FacetWP to classes for Genesis.
+	 *
+	 * @access public
+	 * @param mixed $atts
+	 * @return void
+	 */
+	function custom_facetwp_class( $atts ) {
+		$atts['class'] .= ' facetwp-template';
+		return $atts;
 	}
 }
 
