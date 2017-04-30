@@ -16,7 +16,7 @@ class FLF_Videos {
 	public function __construct() {
 		add_filter( 'embed_oembed_html', array( $this, 'oembed_filter' ), 10, 3 );
 		add_filter( 'video_embed_html', array( $this, 'oembed_filter' ), 10, 3 );
-		add_filter( 'embed_defaults', array( $this, 'new_embed_size' ) );
+		//add_filter( 'embed_defaults', array( $this, 'new_embed_size' ) );
 		add_filter( 'wp_video_shortcode', array( $this, 'video_shortcode' ) , 10, 5);
 
 		add_action( 'init', array( $this, 'cbscom_embed_register_handler' ) );
