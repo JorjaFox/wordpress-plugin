@@ -18,7 +18,7 @@ class FLF_Utility_Pro {
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 12 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'genesis_setup', array( $this, 'theme_setup' ), 20 );
 		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
 		add_action( 'genesis_after_entry_content', array( $this, 'genesis_after_entry_content' ), 15 );
