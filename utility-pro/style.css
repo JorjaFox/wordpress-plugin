@@ -147,17 +147,17 @@ section.jetpack_subscription_widget h4 {
 /* Footer
 --------------------------------------------- */
 
-.footer-widgets .widgettitle {
+.footer-widgets .widgettitle, .footer-widgets .textwidget {
 	text-align: center;
 }
 
 div.footer-widgets svg {
-	fill: #eee;
+	fill: #fff;
 	margin: 2px;
 }
 
 div.footer-widgets svg:hover {
-	fill: #FFF;
+	fill: #40A17C;
 }
 
 /* Search
