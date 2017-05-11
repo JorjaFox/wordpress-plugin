@@ -1,10 +1,9 @@
 <?php
 /*
-Plugin Name: Page Template Plugin : 'Good To Be Bad'
+Plugin Name: Page Template Plugin
 Plugin URI: http://www.wpexplorer.com/wordpress-page-templates-plugin/
-Version: 1.1.0
+Version: 2.0
 Author: WPExplorer
-Author URI: http://www.wpexplorer.com/
 */
 
 class PageTemplater {
@@ -39,24 +38,10 @@ class PageTemplater {
 
 		$this->templates = array();
 
-
-		// Add a filter to the attributes metabox to inject template into the cache.
-		if ( version_compare( floatval( get_bloginfo( 'version' ) ), '4.7', '<' ) ) {
-
-			// 4.6 and older
-			add_filter(
-				'page_attributes_dropdown_pages_args',
-				array( $this, 'register_project_templates' )
-			);
-
-		} else {
-
-			// Add a filter to the wp 4.7 version attributes metabox
-			add_filter(
-				'theme_page_templates', array( $this, 'add_new_template' )
-			);
-
-		}
+		// Add a filter to the wp 4.7 version attributes metabox
+		add_filter(
+			'theme_page_templates', array( $this, 'add_new_template' )
+		);
 
 		// Add a filter to the save post to inject out template into the page cache
 		add_filter(
@@ -72,11 +57,7 @@ class PageTemplater {
 			array( $this, 'view_project_template')
 		);
 
-
-		// Add your templates to this array.
-		$this->templates = array(
-			'videos-template.php' => 'Videos Archive',
-		);
+		$this->templates = PAGE_TEMPLATER_ARRAY;
 
 	}
 

@@ -10,6 +10,10 @@ Author URI: https://ipstenu.org/
 
 if ( !defined( 'FLF_STATIC_CONTENT' ) ) define( 'FLF_STATIC_CONTENT', $_SERVER["DOCUMENT_ROOT"] );
 
+define( 'PAGE_TEMPLATER_ARRAY', [
+	'videos-template.php' => 'Videos Archive',
+] );
+
 include_once( dirname( __FILE__ ) . '/cpts/videos-cpt.php' );
 include_once( dirname( __FILE__ ) . '/cpts/page-templater.php' );
 
