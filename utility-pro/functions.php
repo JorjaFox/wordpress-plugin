@@ -5,16 +5,20 @@
  * @package      jfgenesis
  * @link         https://jorjafox.net
  * @author       Mika Epstein
- * @copyright    Copyright (c) 2015, Mika Epstein
+ * @copyright    Copyright (c) 2015-2017, Mika Epstein
  * @license      GPL-2.0+
  */
 
 class FLF_Utility_Pro {
 
+	protected static $version;
+
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
+
+		self::$version    = '1.3.2';
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
@@ -45,8 +49,9 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css' );
-		wp_enqueue_script( 'content', 'https://static.jorjafox.net/content/code/js/slide-up.js', array(), '1.3.1', true );
+		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css', array(), self::$version, true );
+		wp_enqueue_script( 'sign-up', '//static.jorjafox.net/content/code/js/slide-up.js', array(), self::$version, true );
+		wp_enqueue_script( 'cat-signal', '//static.jorjafox.net/content/code/js/catsignal.js', array(), self::$version, true );
 		wp_dequeue_script( 'utility-pro-fonts' );
 
 		// Load Backstretch scripts only if custom background is being used
@@ -58,7 +63,7 @@ class FLF_Utility_Pro {
 		wp_enqueue_script( 'utility-pro-backstretch', get_stylesheet_directory_uri() . '/js/backstretch.min.js', array( 'jquery' ), '2.0.1', true );
 
 		wp_dequeue_script( 'utility-pro-backstretch-args' );
-		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), '1.3.1', true );
+		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), self::$version, true );
 
 		wp_localize_script( 'utility-pro-backstretch-args', 'utilityBackstretchL10n', array( 'src' => get_background_image() ) );
 	}
