@@ -49,7 +49,7 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function enqueue_scripts() {
-		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css', array(), self::$version, true );
+		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css', array(), self::$version );
 		wp_enqueue_script( 'sign-up', '//static.jorjafox.net/content/code/js/slide-up.js', array(), self::$version, true );
 		wp_enqueue_script( 'cat-signal', '//static.jorjafox.net/content/code/js/catsignal.js', array(), self::$version, true );
 		wp_dequeue_script( 'utility-pro-fonts' );
