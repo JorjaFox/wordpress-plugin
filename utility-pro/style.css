@@ -158,8 +158,11 @@ div.home-gallery svg {
 	text-align: center;
 }
 
-div.footer-widgets svg {
+div.footer-widgets svg * {
 	fill: #fff;
+}
+
+div.footer-widgets svg {
 	margin: 2px;
 	max-height: 50px;
 	max-width: 50px;
