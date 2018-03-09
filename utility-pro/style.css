@@ -105,6 +105,13 @@ section.jetpack_subscription_widget h4 {
 	color: #ffffff;
 }
 
+/* Footer
+--------------------------------------------- */
+div.home-gallery svg {
+	max-width: 50px;
+	max-height: 50px;
+}
+
 /* Call to Action
 --------------------------------------------- */
 
@@ -154,6 +161,8 @@ section.jetpack_subscription_widget h4 {
 div.footer-widgets svg {
 	fill: #fff;
 	margin: 2px;
+	max-height: 50px;
+	max-width: 50px;
 }
 
 div.footer-widgets svg:hover {
