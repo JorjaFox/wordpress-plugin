@@ -18,7 +18,7 @@ class FLF_Utility_Pro {
 	 */
 	public function __construct() {
 
-		self::$version    = '1.3.3';
+		self::$version    = '1.3.4';
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );

@@ -168,7 +168,7 @@ div.footer-widgets svg {
 	max-width: 50px;
 }
 
-div.footer-widgets svg:hover {
+div.footer-widgets svg:hover * {
 	fill: #40A17C;
 }
 
