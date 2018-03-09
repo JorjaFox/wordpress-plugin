@@ -5,7 +5,7 @@
  * @package      jfgenesis
  * @link         https://jorjafox.net
  * @author       Mika Epstein
- * @copyright    Copyright (c) 2015-2017, Mika Epstein
+ * @copyright    Copyright (c) 2015-2018, Mika Epstein
  * @license      GPL-2.0+
  */
 
