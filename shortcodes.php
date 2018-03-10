@@ -16,7 +16,6 @@ class FLF_Shortcodes {
 	public function __construct() {
 		add_shortcode( 'crowdrise', array( $this, 'crowdrise' ) );
 		add_shortcode( 'year', array( $this, 'year' ) );
-
 	}
 
 	/**
@@ -41,10 +40,9 @@ class FLF_Shortcodes {
 	 * @return void
 	 */
 	function year() {
-	  $year = date('Y');
-	  return $year;
+		$year = date('Y');
+		return $year;
 	}
-
 
 }
 
