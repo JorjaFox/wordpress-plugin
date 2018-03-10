@@ -18,7 +18,7 @@ class FLF_Utility_Pro {
 	 */
 	public function __construct() {
 
-		self::$version    = '1.3.4';
+		self::$version    = '1.3.5';
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
@@ -27,7 +27,6 @@ class FLF_Utility_Pro {
 		add_action( 'genesis_entry_header', array( $this, 'genesis_entry_header' ), 11 );
 		add_action( 'genesis_after_entry_content', array( $this, 'genesis_after_entry_content' ), 15 );
 		add_action( 'genesis_before_comment_form', array( $this, 'before_comment_form_policy' ) );
-		add_action( 'genesis_before_comments', array( $this, 'before_comments_ads' ) );
 
 		// Filters
 		add_filter( 'admin_post_thumbnail_html', array( $this, 'admin_post_thumbnail_html' ) );
@@ -115,14 +114,14 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function header() {
-	    include( FLF_STATIC_CONTENT . '/static/content/code/ads/loader.php' );
+		include( FLF_STATIC_CONTENT . '/static/content/code/ads/loader.php' );
 		include( FLF_STATIC_CONTENT . '/static/content/code/analyticstracking.php' );
-	    ?>
+		?>
 		<link type="text/plain" rel="author" href="https://jorjafox.net/humans.txt" />
 		<meta property="og:type" content="website"/>
 		<meta property="og:site_name" content="Fans of LeFox" />
 		<link href="https://plus.google.com/112696204123972047628/" rel="publisher" />
-	    <?php
+		<?php
 	}
 
 	/**
@@ -144,8 +143,8 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function comment_list_args($args) {
-	        $args['callback'] = $this->comment_callback;
-	        return $args;
+		$args['callback'] = $this->comment_callback;
+		return $args;
 	}
 
 	/**
@@ -236,22 +235,12 @@ class FLF_Utility_Pro {
 	function before_comment_form_policy() {
 
 		if ( is_single() && comments_open() ) {
-		    ?>
-		    <div class="comment-policy-box entry-comments">
-		        <p class="comment-policy"><strong>Comment Policy:</strong> By posting a comment, you agree to our <a href="https://jorjafox.net/terms-of-use/">Terms of Use</a> and promise to abide by our <a href="https://jorjafox.net/policy/">Policies</a>. Violations will result in posts being deleted, moderated, or banned. To create your own custom avatar, please register at <a href="http://gravatar.com">Gravatar</a> with the email address you use when commenting.</p>
-		</div>
+			?>
+			<div class="comment-policy-box entry-comments">
+				<p class="comment-policy"><strong>Comment Policy:</strong> By posting a comment, you agree to our <a href="https://jorjafox.net/terms-of-use/">Terms of Use</a> and promise to abide by our <a href="https://jorjafox.net/policy/">Policies</a>. Violations will result in posts being deleted, moderated, or banned. To create your own custom avatar, please register at <a href="http://gravatar.com">Gravatar</a> with the email address you use when commenting.</p>
+			</div>
 			<?php
 		}
-	}
-
-	/**
-	 * Display ads before comments.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	function before_comments_ads() {
-	    echo '<div class="adboxes-footerwidget">'.do_shortcode('[jfoads id=google-large-rectangle]').do_shortcode('[jfoads id=studiopress-120x240]').do_shortcode('[jfoads id=line-buttons-500x250]').'</div>';
 	}
 
 	/**
@@ -262,7 +251,7 @@ class FLF_Utility_Pro {
 	 * @return string Footer credentials, as shortcodes.
 	 */
 	function footer_creds( $creds ) {
-		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a> & <a href="http://helf.us/genesis/">Genesis Framework</a>.<br />Hosted by <a href="https://liquidweb.evyy.net/c/294289/297312/4464">Liquidweb</a>.</p><div class="adboxes-footer">[jfoads id=leaderboard-728x90]</div>';
+		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a> & <a href="http://shareasale.com/r.cfm?b=242694&u=728549&m=28169&urllink=&afftrack=">Genesis Framework</a>.<br />Hosted by <a href="https://liquidweb.evyy.net/c/294289/297312/4464">Liquidweb</a>.</p>';
 	}
 
 	/**
@@ -303,7 +292,7 @@ class FLF_Utility_Pro {
 		add_theme_support( 'genesis-accessibility', array( 'headings', 'search-form', 'skip-links' ) );
 
 		// Add another image size
-	 	add_image_size( 'feature-med', 661, 228, true );
+		add_image_size( 'feature-med', 661, 228, true );
 
 		// Register new widget areas
 		genesis_register_sidebar( array(
@@ -319,9 +308,9 @@ class FLF_Utility_Pro {
 		 * @return void
 		 */
 		function slide_up_bit() {
-		    genesis_widget_area( 'slide-up-bit', array(
-		        'before' => '<div id="bit" class=""><a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow Us</span></a><div id="bitsubscribe">',
-		        'after' => '</div></div>',
+			genesis_widget_area( 'slide-up-bit', array(
+				'before' => '<div id="bit" class=""><a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow Us</span></a><div id="bitsubscribe">',
+				'after' => '</div></div>',
 			) );
 		}
 		add_action( 'genesis_after_footer', 'slide_up_bit' );

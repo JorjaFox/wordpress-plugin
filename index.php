@@ -44,9 +44,9 @@ class FLF_MU_Plugins {
 	 * @return void
 	 */
 	function upload_mimes($existing_mimes){
-	    $existing_mimes['epub'] = 'application/epub+zip'; //allow epub files
-	    $existing_mimes['webm'] = 'video/webm'; //allow webm file
-	    return $existing_mimes;
+		$existing_mimes['epub'] = 'application/epub+zip'; //allow epub files
+		$existing_mimes['webm'] = 'video/webm'; //allow webm file
+		return $existing_mimes;
 	}
 
 	/**
@@ -60,7 +60,7 @@ class FLF_MU_Plugins {
 		$home = get_option( 'home' );
 		foreach ( $links as $l => $link )
 		  if ( 0 === strpos( $link, $home ) )
-	        unset($links[$l]);
+			unset($links[$l]);
 	}
 
 	/**

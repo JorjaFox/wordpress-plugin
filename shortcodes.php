@@ -44,15 +44,15 @@ class FLF_Shortcodes {
 	 * @return void
 	 */
 	function jfoads( $atts ) {
-	    extract( shortcode_atts( array(
-	        'id' => 'default',
-	    ), $atts ) );
-
-	    ob_start();
-	    	$_GET['name'] = $id;
+		extract( shortcode_atts( array(
+			'id' => 'default',
+		), $atts ) );
+	
+		ob_start();
+		$_GET['name'] = $id;
 		include( FLF_STATIC_CONTENT . '/static/content/code/ads/adboxes.php' );
 		$content = ob_get_clean();
-	    return $content;
+		return $content;
 	}
 
 	/**

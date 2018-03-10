@@ -33,8 +33,8 @@ function flf_videos_after_loop() {
 add_action( 'genesis_loop', 'flf_videos_loop' );
 function flf_videos_loop() {
 
-    global $paged; // current paginated page
-    global $query_args; // grab the current wp_query() args
+	global $paged; // current paginated page
+	global $query_args; // grab the current wp_query() args
 
 	$query_args = wp_parse_args(
 		genesis_get_custom_field( 'query_args' ),
@@ -73,10 +73,10 @@ function flf_entry_content ( $post_info ) {
 	global $post;
 	?>
 	<div class="thumb">
-    	<a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'thumbnail', array( 'alt' => get_the_title($post->ID), 'title' => get_the_title($post->ID) ) ); ?></a>
+		<a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'thumbnail', array( 'alt' => get_the_title($post->ID), 'title' => get_the_title($post->ID) ) ); ?></a>
 	</div>
 	<div class="albumdesc">
-    	<h3><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo get_the_title($post->ID); ?></a></h3>
+		<h3><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo get_the_title($post->ID); ?></a></h3>
 		<p style="clear: both; "></p>
 	</div>
 	<?php

@@ -27,12 +27,12 @@ class FLF_Videos {
 	// Filter Videos and wrap in a class:
 	function oembed_filter($html) {
 		$html = "<div class='responsive-oembed'>".$html."</div>";
-	    return $html;
+		return $html;
 	}
 
 	// Make a new embed size
 	function new_embed_size() {
-	    return array( 'width' => 650 );
+		return array( 'width' => 650 );
 	}
 
 	// Filter video shortcode and add a link if there's an MP4
@@ -104,8 +104,8 @@ class FLF_Videos {
 			$meta = $m[0];
 			if ( preg_match_all('/<meta(.+?)>/', $meta, $m) ) {
 				foreach ($m[1] as $match) {
-					foreach ( wp_kses_hair($match, array('http')) as $a)
-					    $info[$a['name']] = $a['value'];
+					foreach ( wp_kses_hair($match, array('http')) as $a )
+						$info[$a['name']] = $a['value'];
 				}
 			}
 

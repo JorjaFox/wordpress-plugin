@@ -47,7 +47,7 @@ h3 {
 /* Utility Bar */
 
 .utility-pro-green .utility-bar {
-	background-color: #107952!important;
+	background-color: rgba(95, 94, 100, 0.9) !important;
 }
 
 #genwpacc-genesis-footer-widgets .textwidget {
@@ -73,10 +73,10 @@ h3 {
 --------------------------------------------- */
 
 .nav-primary .menu-item-14304 a {
-	    color: #fff!important;
+	color: #fff!important;
 }
 .nav-primary .menu-item-14304 a:hover {
-	    color: #8f8f8f!important;
+	color: #8f8f8f!important;
 }
 
 /* Home Welcome
