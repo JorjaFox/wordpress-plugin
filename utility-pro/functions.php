@@ -114,8 +114,6 @@ class FLF_Utility_Pro {
 	 * @return void
 	 */
 	function header() {
-		include( FLF_STATIC_CONTENT . '/static/content/code/ads/loader.php' );
-		include( FLF_STATIC_CONTENT . '/static/content/code/analyticstracking.php' );
 		?>
 		<link type="text/plain" rel="author" href="https://jorjafox.net/humans.txt" />
 		<meta property="og:type" content="website"/>
