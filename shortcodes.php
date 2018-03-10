@@ -15,7 +15,6 @@ class FLF_Shortcodes {
 	 */
 	public function __construct() {
 		add_shortcode( 'crowdrise', array( $this, 'crowdrise' ) );
-		add_shortcode( 'jfoads', array( $this, 'jfoads' ) );
 		add_shortcode( 'year', array( $this, 'year' ) );
 
 	}
@@ -33,26 +32,6 @@ class FLF_Shortcodes {
 			'id' => 'stupidcancer',
 		), $atts ) );
 		return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/'.$id.'/"></script>';
-	}
-
-	/**
-	 * flf_ads_func function.
-	 *
-	 * [jfoads id=liquidweb-325x38]
-	 * @access public
-	 * @param mixed $atts
-	 * @return void
-	 */
-	function jfoads( $atts ) {
-		extract( shortcode_atts( array(
-			'id' => 'default',
-		), $atts ) );
-	
-		ob_start();
-		$_GET['name'] = $id;
-		include( FLF_STATIC_CONTENT . '/static/content/code/ads/adboxes.php' );
-		$content = ob_get_clean();
-		return $content;
 	}
 
 	/**
