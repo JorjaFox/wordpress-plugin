@@ -1,6 +1,6 @@
 /* Header */
 
-.title-area {
+.title-area { 
 	float: right!important;
 }
 
@@ -9,11 +9,18 @@
 	border-bottom: none !important;
 }
 
-.site-header .widget-area { display: none; }
-@media screen and (min-width: 320px) { .site-header .widget-area { display: inline !important; float: left !important; } }
+.site-header .widget-area { 
+	display: none; 
+}
 
-.site-title {
-	margin: 10px 0!important;
+@media screen and (min-width: 320px) { 
+	.site-header .widget-area { 
+		display: inline !important; float: left !important;
+	}
+}
+
+.site-title { 
+	margin: 10px 0!important; 
 }
 
 .site-title a,
@@ -210,11 +217,16 @@ div#comments {
 }
 
 a.comment-reply-link, a.comment-edit-link {
-	background: #107952;
+	background: rgba(16, 121, 82, 0.9);
 	color: #ffffff;
-	padding: 10px;
+	padding: 5px;
 	text-transform: uppercase;
 	border: 1px solid #107952;
+	border-radius: 5px;
+}
+
+a.comment-edit-link {
+	margin-left: 10px;
 }
 
 a.comment-reply-link:hover, a.comment-edit-link:hover {
@@ -228,8 +240,9 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
 	margin-bottom: 20px;
 }
 
-.entry-comments .comment-reply {
+.comment-meta, .entry-comments .comment, .entry-comments .comment-reply {
 	margin-bottom: 10px;
+	padding: 10px;
 }
 
 .comment-header:after {
@@ -246,6 +259,10 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
 
 .comment-meta.commentmetadata {
 	margin-bottom: 0px;
+}
+
+.comment-respond {
+	margin: 20px 0px!important;
 }
 
 /* Search */
@@ -327,6 +344,10 @@ div label.grunion-field-label span {
 	padding-left: 5px;
 }
 
+p.comment-subscription-form {
+	margin: 0 0 10px;
+}
+
 /* Videos */
 
 div.type-video div.post-meta, div.type-video span.post-comments, article.video .entry-categories {
@@ -365,52 +386,19 @@ div.albumdesc h3 {
 
 /* Attachments */
 
-article.attachment div.entry-meta, article.attachment p.entry-meta {display: none;}
+article.attachment div.entry-meta, article.attachment p.entry-meta {
+	display: none;
+}
 
-/* Grins */
-
-#qt_comment_toolbar input[type="button"] {
-	background: none !important;
-	color: #000;
+/* Buttons */
+utility-pro-green .call-to-action-bar .button, .utility-pro-green .button, .utility-pro-green .entry-content .button, .utility-pro-green input[type="submit"] {
+	background: rgba(16, 121, 82, 0.9);
+	color: #ffffff;
 	padding: 5px;
-	margin: 5px;
-	border: none;
-}
-
-#qt_comment_toolbar input[type="button"]:hover {
-	color: #F00;
-}
-
-#qt_comment_strong {
-	font-weight: bold;
-}
-
-#qt_comment_em {
-	font-style: italic;
-}
-
-div#qt_comment_toolbar {
-	border-top: 1px solid #CCC;
-	background-color: #E9E9E9;
-	background-image: -ms-linear-gradient(bottom,#e9e9e9,#ddd);
-	background-image: -moz-linear-gradient(bottom,#e9e9e9,#ddd);
-	background-image: -o-linear-gradient(bottom,#e9e9e9,#ddd);
-	background-image: -webkit-linear-gradient(bottom,#e9e9e9,#ddd);
-	background-image: linear-gradient(bottom,#e9e9e9,#ddd);
-	padding: 2px 8px 0;
-	min-height: 28px;
-}
-
-div#wp_grins {
-	border-bottom: 1px solid #ccc;
-	background-color: #e9e9e9;
-	background-image: -ms-linear-gradient(bottom,#ddd,#e9e9e9);
-	background-image: -moz-linear-gradient(bottom,#ddd,#e9e9e9);
-	background-image: -o-linear-gradient(bottom,#ddd,#e9e9e9);
-	background-image: -webkit-linear-gradient(bottom,#ddd,#e9e9e9);
-	background-image: linear-gradient(bottom,#ddd,#e9e9e9);
-	padding: 2px 8px 0;
-	min-height: 28px;
+	text-transform: uppercase;
+	border: 1px solid #107952;
+	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
 /* Pop up ish footer thing */
@@ -525,15 +513,9 @@ div#bitsubscribe.open {
 /* Ooookay */
 
 @media only screen and (min-width: 1023px) {
-	.wrap {
-		max-width: 1140px; padding: 0;
-	}
-	.title-area {
-		text-align: left; width: 65%; padding-top: 30px;
-	}
-	.site-header .widget-area {
-		text-align: right; width: 35%;
-	}
+	.wrap { max-width: 1140px; padding: 0; }
+	.title-area { text-align: left; width: 65%; padding-top: 30px; }
+	.site-header .widget-area { text-align: right; width: 35%; }
 	.content { float: right; width: 66%; margin-right: 0px !important; }
 	.content-sidebar .content, .sidebar-content .sidebar-primary { float: left; }
 	.sidebar-primary { float: right; width: 31.5%; }
@@ -544,4 +526,5 @@ div#bitsubscribe.open {
 	.genesis-nav-menu .sub-menu a { letter-spacing: 0; width: 200px; }
 	.genesis-nav-menu .sub-menu .sub-menu { margin: -54px 0 0 199px; }
 	.genesis-nav-menu .menu-item:hover { position: static; }
-	.home-gallery-1, .home-gallery-2, .home-gallery-3, .home-gallery-4 { width: 25%; } }
+	.home-gallery-1, .home-gallery-2, .home-gallery-3, .home-gallery-4 { width: 25%; } 
+}
