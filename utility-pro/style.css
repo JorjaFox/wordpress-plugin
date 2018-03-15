@@ -5,7 +5,7 @@
 }
 
 .site-header {
-	background-color: rgba(193, 48, 87, 0.9) !important;
+	background-color: rgba(16, 121, 82, 0.9) !important;
 	border-bottom: none !important;
 }
 
@@ -79,9 +79,12 @@ h3 {
 /* Navigation
 --------------------------------------------- */
 
+.nav-primary, .nav-footer {
+	background-color: #032543;
+}
+
 .nav-primary .menu-item-14304 a {
 	color: #fff!important;
-	background-color: #032543;
 }
 .nav-primary .menu-item-14304 a:hover {
 	color: #8f8f8f!important;
