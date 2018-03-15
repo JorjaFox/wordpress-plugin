@@ -5,7 +5,7 @@
 }
 
 .site-header {
-	background-color: rgba(16, 121, 82, 0.9) !important;
+	background-color: rgba(193, 48, 87, 0.9) !important;
 	border-bottom: none !important;
 }
 
@@ -54,7 +54,7 @@ h3 {
 /* Utility Bar */
 
 .utility-pro-green .utility-bar {
-	background-color: rgba(95, 94, 100, 0.9) !important;
+	background-color: rgba(104, 32, 0, 0.9) !important;
 }
 
 #genwpacc-genesis-footer-widgets .textwidget {
@@ -81,6 +81,7 @@ h3 {
 
 .nav-primary .menu-item-14304 a {
 	color: #fff!important;
+	background-color: #032543;
 }
 .nav-primary .menu-item-14304 a:hover {
 	color: #8f8f8f!important;
@@ -160,6 +161,10 @@ div.home-gallery svg {
 
 /* Footer
 --------------------------------------------- */
+
+.footer-widgets {
+	background-color: #682000;
+}
 
 .footer-widgets .widgettitle, .footer-widgets .textwidget {
 	text-align: center;
