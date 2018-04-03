@@ -1,3 +1,8 @@
+/* Overall */
+.site-container {
+	background-color: rgba(16, 121, 82, 0.9) !important;
+}
+
 /* Header */
 
 .title-area { 
@@ -5,7 +10,7 @@
 }
 
 .site-header {
-	background-color: rgba(16, 121, 82, 0.9) !important;
+	background-color: initial;
 	border-bottom: none !important;
 }
 
@@ -164,6 +169,10 @@ div.home-gallery svg {
 
 /* Footer
 --------------------------------------------- */
+
+.utility-pro-green .utility-bar, .utility-pro-green .site-footer {
+	background-color: initial;
+}
 
 .footer-widgets {
 	background-color: #682000;
