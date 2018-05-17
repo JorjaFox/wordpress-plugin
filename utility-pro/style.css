@@ -293,6 +293,10 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
 	margin: 20px 0px!important;
 }
 
+.comment-form-cookies-consent label {
+	padding-left: 5px;
+}
+
 /* Search */
 
 .header-widget-area .search-form {
