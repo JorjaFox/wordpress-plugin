@@ -6,7 +6,7 @@ Version: 2.0
 Author: WPExplorer
 */
 
-class PageTemplater {
+class FLF_PageTemplater {
 
 	/**
 	 * A reference to an instance of this class.
@@ -24,7 +24,7 @@ class PageTemplater {
 	public static function get_instance() {
 
 		if ( null == self::$instance ) {
-			self::$instance = new PageTemplater();
+			self::$instance = new FLF_PageTemplater();
 		}
 
 		return self::$instance;
@@ -138,4 +138,4 @@ class PageTemplater {
 	}
 
 }
-add_action( 'plugins_loaded', array( 'PageTemplater', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'FLF_PageTemplater', 'get_instance' ) );

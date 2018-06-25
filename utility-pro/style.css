@@ -59,7 +59,7 @@ h3 {
 /* Utility Bar */
 
 .utility-pro-green .utility-bar {
-	background-color: rgba(104, 32, 0, 0.9) !important;
+	background-color: rgba(3, 35, 78, 0.61) !important;
 }
 
 #genwpacc-genesis-footer-widgets .textwidget {
@@ -83,10 +83,6 @@ h3 {
 
 /* Navigation
 --------------------------------------------- */
-
-.nav-primary, .nav-footer {
-	background-color: #032543;
-}
 
 .nav-primary .menu-item-14304 a {
 	color: #fff!important;
@@ -183,10 +179,6 @@ div.home-gallery svg {
 
 .utility-pro-green .utility-bar, .utility-pro-green .site-footer {
 	background-color: initial;
-}
-
-.footer-widgets {
-	background-color: #682000;
 }
 
 .footer-widgets .widgettitle, .footer-widgets .textwidget {

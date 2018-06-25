@@ -18,7 +18,7 @@ class FLF_Utility_Pro {
 	 */
 	public function __construct() {
 
-		self::$version = '1.3.9';
+		self::$version = '1.3.10';
 
 		// Actions
 		add_action( 'wp_head', array( $this, 'header' ) );
@@ -50,7 +50,6 @@ class FLF_Utility_Pro {
 	function enqueue_scripts() {
 		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css', array(), self::$version );
 		wp_enqueue_script( 'sign-up', '//static.jorjafox.net/content/code/js/slide-up.js', array(), self::$version, true );
-		wp_enqueue_script( 'cat-signal', '//static.jorjafox.net/content/code/js/catsignal.js', array(), self::$version, true );
 		wp_dequeue_script( 'utility-pro-fonts' );
 
 		// Load Backstretch scripts only if custom background is being used
