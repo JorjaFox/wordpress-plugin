@@ -34,6 +34,8 @@ class FLF_Jetpack {
 		// If the post isn't empty AND it's a post (not a page etc), let's go!
 		if ( ! empty( $post ) && 'post' === get_post_type( $post->ID ) ) {
 
+			update_post_meta( $post->ID, '_wpas_mess', 'test' );
+
 			// First let's add the hashtags
 			$post_tags = get_the_terms( $post->ID, 'flf_hashtags' );
 			if ( ! empty( $post_tags ) ) {
@@ -50,7 +52,7 @@ class FLF_Jetpack {
 			if ( ! empty( $post_cats ) ) {
 				// Create list of tags with hashtags in front of them
 				foreach ( $post_cats as $cat ) {
-					if ( 'jorja-fox' === $cat->slug ) {
+					if ( 'jorjafox' === $cat->slug ) {
 						// Change slug from this-name to thisname and slap a hashtag on it.
 						$cat_name   = str_replace( '-', '', $cat->slug );
 						$hash_tags .= ' #' . $cat_name;
