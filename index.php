@@ -3,19 +3,10 @@
 Plugin Name: Fans of LeFox Functions
 Plugin URI: https://jorjafox.net/
 Description: Instead of putting it all in my functions.php, I've made a functional plugin.
-Version: 1.3.1
+Version: 1.4
 Author: Mika Epstein
 Author URI: https://ipstenu.org/
 */
-
-if ( !defined( 'FLF_STATIC_CONTENT' ) ) define( 'FLF_STATIC_CONTENT', $_SERVER["DOCUMENT_ROOT"] );
-
-define( 'PAGE_TEMPLATER_ARRAY', [
-	'videos-template.php' => 'Videos Archive',
-] );
-
-include_once( dirname( __FILE__ ) . '/cpts/videos-cpt.php' );
-include_once( dirname( __FILE__ ) . '/cpts/page-templater.php' );
 
 class FLF_MU_Plugins {
 
@@ -23,17 +14,19 @@ class FLF_MU_Plugins {
 	 * Constructor
 	 */
 	public function __construct() {
-		if ( ! isset( $content_width ) ) $content_width = 600;
+		if ( ! isset( $content_width ) ) {
+			$content_width = 600;
+		}
 
+		// If we're running Utility Pro, we'll use our code.
 		$theme = wp_get_theme(); // gets the current theme
-
-		if ( 'Utility Pro' == $theme->name ) {
-			include_once( dirname( __FILE__ ) . '/utility-pro/functions.php' );
+		if ( 'Utility Pro' === $theme->name ) {
+			require_once dirname( __FILE__ ) . '/utility-pro/functions.php';
 		}
 
 		add_filter( 'upload_mimes', array( $this, 'upload_mimes' ) );
 		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
-		add_filter( 'comments_open', array( $this, 'no_comments_open' ) , 10 , 2 );
+		add_filter( 'comments_open', array( $this, 'no_comments_open' ), 10, 2 );
 	}
 
 	/**
@@ -43,7 +36,7 @@ class FLF_MU_Plugins {
 	 * @param mixed $existing_mimes
 	 * @return void
 	 */
-	function upload_mimes($existing_mimes){
+	public function upload_mimes( $existing_mimes ) {
 		$existing_mimes['epub'] = 'application/epub+zip'; //allow epub files
 		$existing_mimes['webm'] = 'video/webm'; //allow webm file
 		return $existing_mimes;
@@ -56,11 +49,13 @@ class FLF_MU_Plugins {
 	 * @param mixed &$links
 	 * @return void
 	 */
-	function no_self_ping( &$links ) {
+	public function no_self_ping( &$links ) {
 		$home = get_option( 'home' );
-		foreach ( $links as $l => $link )
-		  if ( 0 === strpos( $link, $home ) )
-			unset($links[$l]);
+		foreach ( $links as $l => $link ) {
+			if ( 0 === strpos( $link, $home ) ) {
+				unset( $links[ $l ] );
+			}
+		}
 	}
 
 	/**
@@ -71,13 +66,26 @@ class FLF_MU_Plugins {
 	 * @param mixed $post_id
 	 * @return void
 	 */
-	function no_comments_open( $open, $post_id ) {
+	public function no_comments_open( $open, $post_id ) {
 		$post = get_post( $post_id );
-		if( $post->post_type == 'attachment' ) {
+		if ( 'attachment' === $post->post_type ) {
 			return false;
 		}
 		return $open;
 	}
-
 }
+
 new FLF_MU_Plugins();
+
+// Require the add-ons
+require_once 'add-ons/jetpack.php';
+require_once 'add-ons/shortcodes.php';
+require_once 'add-ons/upgrades.php';
+require_once 'add-ons/videos.php';
+
+// Require Custom Post Type stuff
+define( 'PAGE_TEMPLATER_ARRAY', [
+	'videos-template.php' => 'Videos Archive',
+] );
+require_once 'cpts/videos-cpt.php';
+require_once 'cpts/page-templater.php';

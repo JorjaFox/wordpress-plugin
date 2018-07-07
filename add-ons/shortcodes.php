@@ -1,12 +1,9 @@
 <?php
 /*
-Plugin Name: Fans of LeFox Shortcodes Stuff
-Plugin URI:
-Description: Shortcodes etc
-Version: 1.1
-Author: Mika Epstein
-Author URI: http://www.ipstenu.org/
-*/
+ * Shortcodes Stuff
+ * @version 1.1
+ * @package mu-plugins
+ */
 
 class FLF_Shortcodes {
 
@@ -26,11 +23,11 @@ class FLF_Shortcodes {
 	 * @param mixed $atts
 	 * @return void
 	 */
-	function crowdrise( $atts ) {
+	public function crowdrise( $atts ) {
 		extract( shortcode_atts( array(
 			'id' => 'stupidcancer',
 		), $atts ) );
-		return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/'.$id.'/"></script>';
+		return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/' . $id . '/"></script>';
 	}
 
 	/**
@@ -39,8 +36,8 @@ class FLF_Shortcodes {
 	 * @access public
 	 * @return void
 	 */
-	function year() {
-		$year = date('Y');
+	public function year() {
+		$year = date( 'Y' );
 		return $year;
 	}
 

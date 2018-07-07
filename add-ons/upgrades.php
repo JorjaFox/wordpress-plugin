@@ -1,12 +1,9 @@
 <?php
 /*
-Plugin Name: Upgrade Control
-Plugin URI:  http://halfelf.org
-Description: Control for upgrades
-Version: 1.0
-Author: Mika Epstein
-Author URI: http://ipstenu.org/
-*/
+ * Automated Upgrades
+ * @version 1.0
+ * @package mu-plugins
+ */
 
 // auto updates
 //define( 'WP_AUTO_UPDATE_CORE', true );

@@ -1,17 +1,27 @@
 # Fans of LeFox MU Plugins
 
-All MU-PLUGINS for Jorja Fox: Online
+Version 1.4.0
 
-Version 1.0.3
+- `index.php` - Main file
 
-## Code
+## Code (`add-ons`)
 
-- **custom-post-types** - Custom Post Types (just video)
-- **functions** - Sitewide functions
-- **shortcodes** - Shortcodes
-- **stopwords** - Stolen from Yoast
-- **updates** - Automating updates
-- **video** - Shortcode for HTML5 video (may not be needed in 3.6)
+- `jetpack.php` - Custom Jetpack Tweaks
+- `shortcodes.php` - custom shortcodes and embeds
+- `upgrades.php` - Auto upgrade all the things
+- `videos.php` - Custom video embeds (ie. CBS etc)
+
+**Custom Post Type code** (`cpts`)
+
+- `page-templater.php` - customize page templates
+- `videos-cpt.php` - Video CPT
+- `videos-template.php` - Video design
+
+**Utility Pro** (`utility-pro`)
+
+* `backstretch.args.js` - customized for the site
+* `functions.php` - addtional functions
+* `style.css` - CSS
 
 ## License
 

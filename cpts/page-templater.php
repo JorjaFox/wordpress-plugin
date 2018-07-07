@@ -23,7 +23,7 @@ class FLF_PageTemplater {
 	 */
 	public static function get_instance() {
 
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new FLF_PageTemplater();
 		}
 
@@ -49,12 +49,11 @@ class FLF_PageTemplater {
 			array( $this, 'register_project_templates' )
 		);
 
-
 		// Add a filter to the template include to determine if the page has our
 		// template assigned and return it's path
 		add_filter(
 			'template_include',
-			array( $this, 'view_project_template')
+			array( $this, 'view_project_template' )
 		);
 
 		$this->templates = PAGE_TEMPLATER_ARRAY;
@@ -87,7 +86,7 @@ class FLF_PageTemplater {
 		}
 
 		// New cache, therefore remove the old one
-		wp_cache_delete( $cache_key , 'themes');
+		wp_cache_delete( $cache_key, 'themes' );
 
 		// Now add our template to the list of templates by merging our templates
 		// with the existing templates array from the cache.
@@ -115,21 +114,17 @@ class FLF_PageTemplater {
 		}
 
 		// Return default template if we don't have a custom one defined
-		if ( ! isset( $this->templates[get_post_meta(
-			$post->ID, '_wp_page_template', true
-		)] ) ) {
+		if ( ! isset( $this->templates[ get_post_meta( $post->ID, '_wp_page_template', true ) ] ) ) {
 			return $template;
 		}
 
-		$file = plugin_dir_path( __FILE__ ). get_post_meta(
-			$post->ID, '_wp_page_template', true
-		);
+		$file = plugin_dir_path( __FILE__ ) . get_post_meta( $post->ID, '_wp_page_template', true );
 
 		// Just to be safe, we check if the file exist first
 		if ( file_exists( $file ) ) {
 			return $file;
 		} else {
-			echo $file;
+			echo $file; // WPCS: XSS okay
 		}
 
 		// Return template
@@ -138,4 +133,5 @@ class FLF_PageTemplater {
 	}
 
 }
+
 add_action( 'plugins_loaded', array( 'FLF_PageTemplater', 'get_instance' ) );

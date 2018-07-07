@@ -47,7 +47,7 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function enqueue_scripts() {
+	public function enqueue_scripts() {
 		wp_enqueue_style( 'flf-style', WP_CONTENT_URL . '/mu-plugins/utility-pro/style.css', array(), self::$version );
 		wp_enqueue_script( 'sign-up', '//static.jorjafox.net/content/code/js/slide-up.js', array(), self::$version, true );
 		wp_dequeue_script( 'utility-pro-fonts' );
@@ -61,7 +61,7 @@ class FLF_Utility_Pro {
 		wp_enqueue_script( 'utility-pro-backstretch', get_stylesheet_directory_uri() . '/js/backstretch.min.js', array( 'jquery' ), '2.0.1', true );
 
 		wp_dequeue_script( 'utility-pro-backstretch-args' );
-		wp_enqueue_script( 'utility-pro-backstretch-args',  WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), self::$version, true );
+		wp_enqueue_script( 'utility-pro-backstretch-args', WP_CONTENT_URL . '/mu-plugins/utility-pro/backstretch.args.js', array( 'utility-pro-backstretch' ), self::$version, true );
 
 		wp_localize_script( 'utility-pro-backstretch-args', 'utilityBackstretchL10n', array( 'src' => get_background_image() ) );
 	}
@@ -72,8 +72,8 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function more_link_text() {
-		return '&#x02026; <a class="more-link" href="'. get_permalink( get_the_ID() ) . '">[' . genesis_a11y_more_link( 'Continue Reading' ) . ']</a>';
+	public function more_link_text() {
+		return '&#x02026; <a class="more-link" href="' . get_permalink( get_the_ID() ) . '">[' . genesis_a11y_more_link( 'Continue Reading' ) . ']</a>';
 	}
 
 	/**
@@ -82,10 +82,10 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function genesis_after_entry_content() {
+	public function genesis_after_entry_content() {
 		global $post;
-		if ( has_excerpt( $post->ID ) && !is_singular() ) {
-			echo '<p><a class="more-link" href="'. get_permalink( $post->ID ) . '">[' . genesis_a11y_more_link( 'Continue Reading' ) . ']</a></p>';
+		if ( has_excerpt( $post->ID ) && ! is_singular() ) {
+			echo '<p><a class="more-link" href="' . esc_url( get_permalink( $post->ID ) ) . '">[' . genesis_a11y_more_link( 'Continue Reading' ) . ']</a></p>';
 		}
 	}
 
@@ -96,10 +96,10 @@ class FLF_Utility_Pro {
 	 * @param mixed $content
 	 * @return void
 	 */
-	function admin_post_thumbnail_html( $content ) {
+	public function admin_post_thumbnail_html( $content ) {
 		global $_wp_additional_image_sizes;
 
-		$featured_image = $_wp_additional_image_sizes['feature-large']['width'].'x'.$_wp_additional_image_sizes['feature-large']['height'];
+		$featured_image = $_wp_additional_image_sizes['feature-large']['width'] . 'x' . $_wp_additional_image_sizes['feature-large']['height'];
 		$imagesize      = '<p>Image Size:' . $featured_image . ' px</p>';
 		$content        = $imagesize . $content;
 
@@ -112,7 +112,7 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function header() {
+	public function header() {
 		?>
 		<link type="text/plain" rel="author" href="https://jorjafox.net/humans.txt" />
 		<meta property="og:type" content="website"/>
@@ -127,7 +127,7 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function genesis_title_comments() {
+	public function genesis_title_comments() {
 		$title = '<h3>Discussion:</h3>';
 		return $title;
 	}
@@ -139,7 +139,7 @@ class FLF_Utility_Pro {
 	 * @param mixed $args
 	 * @return void
 	 */
-	function comment_list_args($args) {
+	public function comment_list_args( $args ) {
 		$args['callback'] = $this->comment_callback;
 		return $args;
 	}
@@ -153,9 +153,9 @@ class FLF_Utility_Pro {
 	 * @param mixed $depth
 	 * @return void
 	 */
-	function comment_callback( $comment, $args, $depth ) {
+	public function comment_callback( $comment, $args, $depth ) {
 
-		$GLOBALS['comment'] = $comment;
+		$GLOBALS['comment'] = $comment; // WPCS: override okay
 		global $post;
 		?>
 
@@ -169,7 +169,12 @@ class FLF_Utility_Pro {
 					<?php echo get_avatar( $comment, $size = $args['avatar_size'] ); ?>
 
 					<div class="comment-meta commentmetadata"><small>
-						On <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'genesis' ), get_comment_date(), get_comment_time() ); ?></a>
+						On <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+						<?php
+						// translators: 1 comment date, 2 comment time
+						printf( __( '%1$s at %2$s', 'genesis' ), wp_kses_post( get_comment_date() ), wp_kses_post( get_comment_time() ) );
+						?>
+						</a>
 					</small></div><!-- end .comment-meta -->
 
 					<span class="jf-title">
@@ -183,32 +188,39 @@ class FLF_Utility_Pro {
 						} else {
 							$userrole = 'Member';
 						}
-						?><span class="screen-reader-text"><?php echo $userrole; ?></span>
+						?>
+						<span class="screen-reader-text"><?php echo wp_kses_post( $userrole ); ?></span>
 					</span>
 
-					<?php printf( '<cite><span class="fn">%1$s</span></cite> <span class="says">%2$s:</span>',
-							get_comment_author_link(),
-							apply_filters( 'comment_author_says_text', __( 'said', 'genesis' ) ) ); ?>
-			 	</div><!-- end .comment-author -->
+					<?php printf( '<cite><span class="fn">%1$s</span></cite> <span class="says">%2$s:</span>', get_comment_author_link(), apply_filters( 'comment_author_says_text', __( 'said', 'genesis' ) ) ); ?>
+				</div><!-- end .comment-author -->
 			</div>
 
 			<div class="comment-content">
-				<?php if ( $comment->comment_approved == '0' ) : ?>
+				<?php if ( '0' === $comment->comment_approved ) : ?>
 					<p class="alert"><em><?php echo apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation. Please patient while we review the evidence.', 'genesis' ) ); ?></em></p>
 				<?php endif; ?>
 
 				<?php comment_text(); ?>
 			</div><!-- end .comment-content -->
 
-			<?php if ( comments_open() ) : ?>
+			<?php
+			if ( comments_open() ) :
+				?>
 				<div class="comment-reply">
-					<?php comment_reply_link( array_merge( $args, array( 'depth' => 1, 'max_depth' => 2 ) ) ); ?>
-					<?php edit_comment_link( __( 'Edit', 'genesis' ), '' ); ?>
+					<?php
+					$comment_array = array(
+						'depth'     => 1,
+						'max_depth' => 2,
+					);
+					comment_reply_link( array_merge( $args, $comment_array ) );
+					edit_comment_link( __( 'Edit', 'genesis' ), '' );
+					?>
 				</div>
-			<?php endif; ?>
-			<?php do_action( 'genesis_after_comment' );
-
-		/** No ending </li> tag because of comment threading */
+				<?php
+			endif;
+			do_action( 'genesis_after_comment' );
+			// No ending </li> tag because of comment threading
 	}
 
 	/**
@@ -218,7 +230,7 @@ class FLF_Utility_Pro {
 	 * @param mixed $defaults
 	 * @return void
 	 */
-	function comment_form_defaults( $defaults ) {
+	public function comment_form_defaults( $defaults ) {
 		$defaults['comment_notes_after'] = '';
 		return $defaults;
 	}
@@ -229,7 +241,7 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function before_comment_form_policy() {
+	public function before_comment_form_policy() {
 
 		if ( is_single() && comments_open() ) {
 			?>
@@ -247,7 +259,7 @@ class FLF_Utility_Pro {
 	 * @param string $creds Existing credentials.
 	 * @return string Footer credentials, as shortcodes.
 	 */
-	function footer_creds( $creds ) {
+	public function footer_creds( $creds ) {
 		return '<p>Copyright [footer_copyright first="1996"] <em><a href="https://jorjafox.net/">Fans of LeFox</a></em><br />Powered by <a href="https://wordpress.org/">WordPress</a> & <a href="http://www.shareasale.com/r.cfm?b=778546&u=728549&m=61628&urllink=&afftrack=">Utility Pro</a> & <a href="http://shareasale.com/r.cfm?b=242694&u=728549&m=28169&urllink=&afftrack=">Genesis Framework</a>.<br />Hosted by <a href="https://liquidweb.evyy.net/c/294289/297312/4464">Liquidweb</a>.</p>';
 	}
 
@@ -258,9 +270,10 @@ class FLF_Utility_Pro {
 	 * @param mixed $post_info
 	 * @return void
 	 */
-	function genesis_post_info( $post_info = '' ) {
-		if ( is_singular( array ( 'videos', 'page' ) ) )
+	public function genesis_post_info( $post_info = '' ) {
+		if ( is_singular( array( 'videos', 'page' ) ) ) {
 			$post_info = 'By the Fans of Le Fox Librarians [post_edit]';
+		}
 		return $post_info;
 	}
 
@@ -270,9 +283,11 @@ class FLF_Utility_Pro {
 	 * @access public
 	 * @return void
 	 */
-	function genesis_entry_header() {
+	public function genesis_entry_header() {
 		$post_info = $this->genesis_post_info();
-		if ( is_page() ) printf( '<p class="entry-meta">%s</p>', do_shortcode( $post_info ) );
+		if ( is_page() ) {
+			printf( '<p class="entry-meta">%s</p>', do_shortcode( $post_info ) );
+		}
 	}
 
 	/**
@@ -283,7 +298,7 @@ class FLF_Utility_Pro {
 	 *
 	 * @access public
 	 */
-	function theme_setup() {
+	public function theme_setup() {
 
 		// Genesis accessibility
 		add_theme_support( 'genesis-accessibility', array( 'headings', 'search-form', 'skip-links' ) );
@@ -293,9 +308,9 @@ class FLF_Utility_Pro {
 
 		// Register new widget areas
 		genesis_register_sidebar( array(
-			'id'            => 'slide-up-bit',
-			'name'          => __( 'Slide Up Bit', 'jfgenesis' ),
-			'description'   => __( 'This is a widget area that slides up.', 'jfgenesis' ),
+			'id'          => 'slide-up-bit',
+			'name'        => __( 'Slide Up Bit', 'jfgenesis' ),
+			'description' => __( 'This is a widget area that slides up.', 'jfgenesis' ),
 		) );
 
 		/**
@@ -307,7 +322,7 @@ class FLF_Utility_Pro {
 		function slide_up_bit() {
 			genesis_widget_area( 'slide-up-bit', array(
 				'before' => '<div id="bit" class=""><a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow Us</span></a><div id="bitsubscribe">',
-				'after' => '</div></div>',
+				'after'  => '</div></div>',
 			) );
 		}
 		add_action( 'genesis_after_footer', 'slide_up_bit' );
@@ -339,9 +354,10 @@ class FLF_Utility_Pro {
 	 * @param string $post_meta (default: '')
 	 * @return void
 	 */
-	function genesis_post_meta( $post_meta = '' ) {
-		if ( is_singular( array( 'videos' ) ))
+	public function genesis_post_meta( $post_meta = '' ) {
+		if ( is_singular( array( 'videos' ) ) ) {
 			$post_meta = '[post_terms taxonomy="video_subjects"]</p><p class="entry-meta-copyright">' . $this->post_meta_footer( 'videos' );
+		}
 		return $post_meta;
 	}
 
@@ -352,7 +368,7 @@ class FLF_Utility_Pro {
 	 * @param mixed $atts
 	 * @return void
 	 */
-	function custom_facetwp_class( $atts ) {
+	public function custom_facetwp_class( $atts ) {
 		$atts['class'] .= ' facetwp-template';
 		return $atts;
 	}

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="Fans of LeFox Coding Standards">
+    <description>A custom ruleset to take in account both WordPress and Fans of LeFox standards.</description>
+
+    <rule ref="WordPress-Extra">
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+    </rule>
+
+	<rule ref="WordPress.Security.EscapeOutput">
+        <properties>
+            <property name="customAutoEscapedFunctions" value="genesis_a11y_more_link" type="array" />
+            <property name="customEscapingFunctions" value="facetwp_display" type="array" />
+        </properties>
+    </rule>
+</ruleset>
