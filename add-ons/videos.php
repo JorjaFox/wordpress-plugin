@@ -117,11 +117,11 @@ class FLF_Videos {
 		}
 
 		// fix the url to look like their normal embed code
-		$parsed_url = remove_query_arg( array('partner','autoPlayVid'), $parsed_url );
-		$parsed_url = add_query_arg( array('partner'=>'cbs'), $parsed_url );
+		$parsed_url = remove_query_arg( array( 'partner', 'autoPlayVid' ), $parsed_url );
+		$parsed_url = add_query_arg( array( 'partner' => 'cbs' ), $parsed_url );
 
 		// decide on width and height
-		if ( !empty($rawattr['width']) && !empty($rawattr['height']) ) {
+		if ( ! empty( $rawattr['width'] ) && ! empty( $rawattr['height'] ) ) {
 			$width  = (int) $rawattr['width'];
 			$height = (int) $rawattr['height'];
 		} else {
@@ -135,7 +135,7 @@ class FLF_Videos {
 		<param name='allowScriptAccess' value='always'></param>
 		<embed width='{$width}' height='{$height}' src='{$parsed_url}' allowFullScreen='true' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
 		</object>
-		<p>Source: <a href='".$url."'>CBS Video</a></p>";
+		<p>Source: <a href='" . $url . "'>CBS Video</a></p>";
 
 		// cache, and return
 		update_post_meta( $post->ID, $cachekey, $ret );
@@ -149,20 +149,21 @@ class FLF_Videos {
 	 * Example: [ooyala video_pcode="VlajQ6DTdv9-OYPHSJq6w4eU0Bfi" width="222" embedCode="NwdzM3aDp4BB3-MEdPemlMJK5XH7ZVdn"]
 	 */
 	public function ooyala_shortcode( $atts ) {
-		extract(shortcode_atts(array(
-			'width' => '500',
-			'video_pcode' => '',
-			'embedcode' => '',
+		extract( shortcode_atts(
+			array(
+				'width'       => '500',
+				'video_pcode' => '',
+				'embedcode'   => '',
 			), $atts
 		));
 
-		$width = (int) $width;
-		$height = floor( $width*9/16 );
+		$width  = (int) $width;
+		$height = floor( $width * 9 / 16 );
 
-		if ( !is_feed() ) {
-			$output = '<script src="http://player.ooyala.com/player.js?video_pcode='.$video_pcode.'&width='.$width.'&deepLinkEmbedCode='.$embedcode.'&height='.$height.'&embedCode='.$embedcode.'"></script>';
-		} elseif ( $options['show_in_feed']  ) {
-			$output = __('[There is a video that cannot be displayed in this feed. ', 'ooyalavideo').'<a href="'.get_permalink().'">'.__('Visit the blog entry to see the video.]','ooyalavideo').'</a>';
+		if ( ! is_feed() ) {
+			$output = '<script src="http://player.ooyala.com/player.js?video_pcode=' . $video_pcode . '&width=' . $width . '&deepLinkEmbedCode=' . $embedcode . '&height=' . $height . '&embedCode=' . $embedcode . '"></script>';
+		} elseif ( $options['show_in_feed'] ) {
+			$output = __( '[There is a video that cannot be displayed in this feed. ', 'ooyalavideo' ) . '<a href="' . get_permalink() . '">' . __( 'Visit the blog entry to see the video.]', 'ooyalavideo' ) . '</a>';
 		}
 		return $output;
 	}
