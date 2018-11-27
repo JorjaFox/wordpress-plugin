@@ -20,6 +20,7 @@ class FLF_Jetpack {
 			'hierarchical'          => false,
 			'public'                => false,
 			'show_ui'               => true,
+			'show_in_rest'          => true,
 			'update_count_callback' => '_update_post_term_count',
 			'rewrite'               => false,
 		);
