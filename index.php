@@ -83,9 +83,4 @@ require_once 'add-ons/shortcodes.php';
 require_once 'add-ons/upgrades.php';
 require_once 'add-ons/videos.php';
 
-// Require Custom Post Type stuff
-define( 'PAGE_TEMPLATER_ARRAY', [
-	'videos-template.php' => 'Videos Archive',
-] );
-require_once 'cpts/videos-cpt.php';
-require_once 'cpts/page-templater.php';
+require_once 'cpts/videos.php';
