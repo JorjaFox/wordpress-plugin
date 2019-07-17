@@ -1,6 +1,6 @@
 # Fans of LeFox MU Plugins
 
-Version 1.4.0
+Version 1.5.0
 
 - `index.php` - Main file
 
@@ -13,15 +13,7 @@ Version 1.4.0
 
 **Custom Post Type code** (`cpts`)
 
-- `page-templater.php` - customize page templates
-- `videos-cpt.php` - Video CPT
-- `videos-template.php` - Video design
-
-**Utility Pro** (`utility-pro`)
-
-* `backstretch.args.js` - customized for the site
-* `functions.php` - addtional functions
-* `style.css` - CSS
+- `videos.php` - Video CPT
 
 ## License
 

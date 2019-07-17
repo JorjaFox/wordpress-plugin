@@ -24,7 +24,7 @@ class FLF_CPT_Videos {
 	 * Admin Init
 	 */
 	public function admin_init() {
-		add_action( 'admin_head', array($this, 'admin_css') );
+		add_action( 'admin_head', array( $this, 'admin_css' ) );
 		add_action( 'dashboard_glance_items', array( $this, 'dashboard_glance_items' ) );
 	}
 
@@ -48,7 +48,7 @@ class FLF_CPT_Videos {
 			'not_found'          => 'No videos found',
 			'not_found_in_trash' => 'No videos in the Trash',
 		);
-		$args = array(
+		$args   = array(
 			'label'               => 'videos',
 			'description'         => 'Videos',
 			'labels'              => $labels,
@@ -91,10 +91,10 @@ class FLF_CPT_Videos {
 			'add_new_item'               => 'Add New Subject',
 			'new_item_name'              => 'New Subject Name',
 			'separate_items_with_commas' => 'Separate Subjects with commas',
-			'add_or_remove_items'        => 'Add or remove Subjects' ,
-			'choose_from_most_used'      => 'Choose from the most used Subjects' ,
-			'not_found'                  => 'No Subjects found.' ,
-			'menu_name'                  => 'Subjects' ,
+			'add_or_remove_items'        => 'Add or remove Subjects',
+			'choose_from_most_used'      => 'Choose from the most used Subjects',
+			'not_found'                  => 'No Subjects found.',
+			'menu_name'                  => 'Subjects',
 		);
 		//parameters for the new taxonomy
 		$args_focus = array(
@@ -114,9 +114,11 @@ class FLF_CPT_Videos {
 	 *
 	 * Set the default to videos.
 	 */
-	function default_post_format( $format ) {
+	public function default_post_format( $format ) {
 		global $post_type;
-		if ( $post_type == 'videos' ) $format = 'video';
+		if ( 'videos' === $post_type ) {
+			$format = 'video';
+		}
 		return $format;
 	}
 
@@ -137,9 +139,9 @@ class FLF_CPT_Videos {
 	/*
 	 * Style Admin CSS
 	 */
-	function admin_css() {
-	   echo "<style type='text/css'>
-			   #adminmenu #menu-posts-videos div.wp-menu-image:before, #dashboard_right_now li.videos-count a:before {
+	public function admin_css() {
+		echo "<style type='text/css'>
+				#adminmenu #menu-posts-videos div.wp-menu-image:before, #dashboard_right_now li.videos-count a:before {
 					content: '\\f234';
 					margin-left: -1px;
 				}
@@ -153,7 +155,7 @@ class FLF_CPT_Videos {
 		foreach ( array( 'videos' ) as $post_type ) {
 			$num_posts = wp_count_posts( $post_type );
 			if ( $num_posts && $num_posts->publish ) {
-				if ( 'videos' == $post_type ) {
+				if ( 'videos' === $post_type ) {
 					$text = _n( '%s Video', '%s Videos', $num_posts->publish );
 				}
 				$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );

@@ -5,7 +5,7 @@
  * @package mu-plugins
  */
 
-// auto updates
+// Define auto updates
 //define( 'WP_AUTO_UPDATE_CORE', true );
 define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
 
@@ -22,6 +22,6 @@ add_filter( 'auto_update_theme', '__return_true' );
 add_filter( 'auto_core_update_send_email', '__return_true', 1 );
 add_filter( 'automatic_updates_send_debug_email', '__return_true', 1 );
 
-// SSL fixes
+// These SSL fixes are only needed for Multisite
 //add_filter('https_ssl_verify', '__return_false');
 //add_filter('https_local_ssl_verify', '__return_false');

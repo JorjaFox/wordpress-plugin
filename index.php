@@ -3,7 +3,7 @@
 Plugin Name: Fans of LeFox Functions
 Plugin URI: https://jorjafox.net/
 Description: Instead of putting it all in my functions.php, I've made a functional plugin.
-Version: 1.4
+Version: 1.5
 Author: Mika Epstein
 Author URI: https://ipstenu.org/
 */
@@ -16,12 +16,6 @@ class FLF_MU_Plugins {
 	public function __construct() {
 		if ( ! isset( $content_width ) ) {
 			$content_width = 600;
-		}
-
-		// If we're running Utility Pro, we'll use our code.
-		$theme = wp_get_theme(); // gets the current theme
-		if ( 'Utility Pro' === $theme->name ) {
-			require_once dirname( __FILE__ ) . '/utility-pro/functions.php';
 		}
 
 		add_filter( 'upload_mimes', array( $this, 'upload_mimes' ) );
@@ -78,9 +72,9 @@ class FLF_MU_Plugins {
 new FLF_MU_Plugins();
 
 // Require the add-ons
-require_once 'add-ons/jetpack.php';
 require_once 'add-ons/shortcodes.php';
 require_once 'add-ons/upgrades.php';
+require_once 'add-ons/top-bar.php';
 require_once 'add-ons/videos.php';
 
 require_once 'cpts/videos.php';
