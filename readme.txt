@@ -6,7 +6,6 @@ Version 1.5.0
 
 ## Code (`add-ons`)
 
-- `jetpack.php` - Custom Jetpack Tweaks
 - `shortcodes.php` - custom shortcodes and embeds
 - `upgrades.php` - Auto upgrade all the things
 - `videos.php` - Custom video embeds (ie. CBS etc)
