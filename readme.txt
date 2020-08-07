@@ -1,11 +1,12 @@
 # Fans of LeFox MU Plugins
 
-Version 1.5.0
+Version 1.5.1
 
 - `index.php` - Main file
 
 ## Code (`add-ons`)
 
+- `comment-probation.php` - Fork of abandoned plugin
 - `shortcodes.php` - custom shortcodes and embeds
 - `upgrades.php` - Auto upgrade all the things
 - `videos.php` - Custom video embeds (ie. CBS etc)

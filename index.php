@@ -72,6 +72,7 @@ class FLF_MU_Plugins {
 new FLF_MU_Plugins();
 
 // Require the add-ons
+require_once 'add-ons/comment-probation.php';
 require_once 'add-ons/shortcodes.php';
 require_once 'add-ons/upgrades.php';
 require_once 'add-ons/videos.php';
