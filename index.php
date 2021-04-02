@@ -74,6 +74,7 @@ new FLF_MU_Plugins();
 // Require the add-ons
 require_once 'add-ons/comment-probation.php';
 require_once 'add-ons/shortcodes.php';
+require_once 'add-ons/tvmaze.php';
 require_once 'add-ons/upgrades.php';
 require_once 'add-ons/videos.php';
 require_once 'cpts/videos.php';

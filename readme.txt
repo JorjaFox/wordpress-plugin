@@ -8,6 +8,7 @@ Version 1.5.1
 
 - `comment-probation.php` - Fork of abandoned plugin
 - `shortcodes.php` - custom shortcodes and embeds
+- `tvmaze.php` - Widget to display next episode of a TV show.
 - `upgrades.php` - Auto upgrade all the things
 - `videos.php` - Custom video embeds (ie. CBS etc)
 
