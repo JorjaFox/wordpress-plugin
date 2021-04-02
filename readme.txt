@@ -7,6 +7,7 @@ Version 1.5.0
 ## Code (`add-ons`)
 
 - `shortcodes.php` - custom shortcodes and embeds
+- `tvmaze.php` - Widget to display next episode of a TV show.
 - `upgrades.php` - Auto upgrade all the things
 - `videos.php` - Custom video embeds (ie. CBS etc)
 
