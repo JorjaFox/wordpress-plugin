@@ -54,7 +54,7 @@ class FLF_TVMaze extends WP_Widget {
 		// phpcs:ignore WordPress.Security.EscapeOutput
 		echo $before_widget;
 
-		$content = '<h2 class="widget-title">' . $title . '</h2>';
+		$widget_title = '<h2 class="widget-title">' . $title . '</h2>';
 
 		if ( isset( $show_id ) ) {
 			// This is where you run the code and display the output
@@ -70,17 +70,21 @@ class FLF_TVMaze extends WP_Widget {
 							$next_date_time   = DateTime::createFromFormat( 'Y-m-d', $next_info['airdate'] );
 							$next_date_string = $next_date_time->format( 'M d, Y' );
 
-							$content .= '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string . '</p><small>' . $next_info['summary'] . '</small>';
+							$content  = '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string . '</p><small>' . $next_info['summary'] . '</small>';
 							$content .= '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">More <em>' . $show_info['name'] . '</em> Episodes</a><br /><small><a href="' . $url . '">Powered by TV Maze</a></small>';
 						}
 					}
-				} else {
-					$content .= 'Coming soon...';
 				}
 			}
 		}
 
-		echo wp_kses_post( $content );
+		if ( ! isset( $content ) && isset( $slug ) ) {
+			$content = '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">Coming soon...</a></p>';
+		} else {
+			$content = '<p>Coming soon...</p>';
+		}
+
+		echo wp_kses_post( $widget_title . $content );
 
 		// phpcs:ignore WordPress.Security.EscapeOutput
 		echo $after_widget;
