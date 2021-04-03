@@ -78,10 +78,8 @@ class FLF_TVMaze extends WP_Widget {
 			}
 		}
 
-		if ( ! isset( $content ) && isset( $slug ) ) {
-			$content = '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">Coming soon...</a></p>';
-		} else {
-			$content = '<p>Coming soon...</p>';
+		if ( ! isset( $content ) ) {
+			$content = ( isset( $slug ) ) ? '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">Coming soon...</a></p>' : '<p>Coming soon...</p>';
 		}
 
 		echo wp_kses_post( $widget_title . $content );
