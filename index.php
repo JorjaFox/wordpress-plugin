@@ -21,6 +21,7 @@ class FLF_MU_Plugins {
 		add_filter( 'upload_mimes', array( $this, 'upload_mimes' ) );
 		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
 		add_filter( 'comments_open', array( $this, 'no_comments_open' ), 10, 2 );
+		add_filter( 'ast_block_templates_disable', '__return_true' );
 	}
 
 	/**
