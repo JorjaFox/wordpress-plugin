@@ -3,7 +3,7 @@
 Plugin Name: Fans of LeFox Functions
 Plugin URI: https://jorjafox.net/
 Description: Instead of putting it all in my functions.php, I've made a functional plugin.
-Version: 1.5
+Version: 1.5.2
 Author: Mika Epstein
 Author URI: https://ipstenu.org/
 */
@@ -22,6 +22,7 @@ class FLF_MU_Plugins {
 		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
 		add_filter( 'comments_open', array( $this, 'no_comments_open' ), 10, 2 );
 		add_filter( 'ast_block_templates_disable', '__return_true' );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'disable_editor_fullscreen_by_default' ) );
 	}
 
 	/**
@@ -67,6 +68,14 @@ class FLF_MU_Plugins {
 			return false;
 		}
 		return $open;
+	}
+
+	/**
+	 * Disable Gutenberg's full screen editor default. WHY?! I still think Matt was wrong.
+	 */
+	public function disable_editor_fullscreen_by_default() {
+		$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
+		wp_add_inline_script( 'wp-blocks', $script );
 	}
 }
 
