@@ -23,6 +23,7 @@ class FLF_MU_Plugins {
 		add_filter( 'comments_open', array( $this, 'no_comments_open' ), 10, 2 );
 		add_filter( 'ast_block_templates_disable', '__return_true' );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'disable_editor_fullscreen_by_default' ) );
+		add_filter( 'wp_headers', array( $this, 'disable_floc' ), 10, 2 );
 	}
 
 	/**
@@ -77,6 +78,29 @@ class FLF_MU_Plugins {
 		$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
 		wp_add_inline_script( 'wp-blocks', $script );
 	}
+
+	/**
+	 * Send a special header to disable FLoC tracking of users.
+	 *
+	 * @param string[] $headers Associative array of headers to be sent.
+	 * @param WP       $wp      Current WordPress environment instance.
+	 *
+	 * @return string[] $headers Associative array of headers to be sent.
+	 */
+	public function disable_floc( $headers, $wp ) {
+		if (
+			isset( $headers['Permissions-Policy'] ) &&
+			! empty( $headers['Permissions-Policy'] ) &&
+			strpos( $headers['Permission-Policy'], 'interest-cohort' ) === false
+		) {
+			$headers['Permissions-Policy'] = $headers['Permissions-Policy'] . ', interest-cohort=()';
+		} else {
+			$headers['Permissions-Policy'] = 'interest-cohort=()';
+		}
+
+		return $headers;
+	}
+
 }
 
 new FLF_MU_Plugins();
