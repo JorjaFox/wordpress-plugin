@@ -1,6 +1,7 @@
 <?php
 
 require_once 'comment-probation.php';
+require_once 'plugins.php';
 require_once 'shortcodes.php';
 require_once 'tvmaze.php';
 require_once 'upgrades.php';
