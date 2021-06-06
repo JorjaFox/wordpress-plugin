@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Remove Jetpack's External Media feature.
  */
