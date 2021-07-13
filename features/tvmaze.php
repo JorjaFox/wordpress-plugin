@@ -66,13 +66,17 @@ class FLF_TVMaze extends WP_Widget {
 					$next_get = wp_remote_get( $show_info['_links']['nextepisode']['href'] );
 					if ( is_array( $next_get ) && ! is_wp_error( $next_get ) ) {
 						$next_info = json_decode( $next_get['body'], true );
-						if ( isset( $next_info['summary'] ) ) {
-							$next_date_time   = DateTime::createFromFormat( 'Y-m-d', $next_info['airdate'] );
-							$next_date_string = $next_date_time->format( 'M d, Y' );
 
-							$content  = '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string . '</p><small>' . $next_info['summary'] . '</small>';
-							$content .= '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">More <em>' . $show_info['name'] . '</em> Episodes</a><br /><small><a href="' . $url . '">Powered by TV Maze</a></small>';
+						$next_date_time   = DateTime::createFromFormat( 'Y-m-d', $next_info['airdate'] );
+						$next_date_string = $next_date_time->format( 'M d, Y' );
+
+						$content = '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string . '</p>';
+
+						if ( isset( $next_info['summary'] ) ) {
+							$content = '<small>' . $next_info['summary'] . '</small>';
 						}
+
+						$content .= '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">More <em>' . $show_info['name'] . '</em> Episodes</a><br /><small><a href="' . $url . '">Powered by TV Maze</a></small>';
 					}
 				}
 			}
