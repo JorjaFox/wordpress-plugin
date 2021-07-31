@@ -54,33 +54,42 @@ class FLF_TVMaze extends WP_Widget {
 		// phpcs:ignore WordPress.Security.EscapeOutput
 		echo $before_widget;
 
-		$widget_title = '<h2 class="widget-title">' . $title . '</h2>';
-
 		if ( isset( $show_id ) ) {
 			// This is where you run the code and display the output
 			// Extract Show name and next ep.
 			$show_get = wp_remote_get( 'http://api.tvmaze.com/shows/' . $show_id );
 			if ( is_array( $show_get ) && ! is_wp_error( $show_get ) ) {
 				$show_info = json_decode( $show_get['body'], true );
+
+				if ( isset( $show_info['name'] ) && ! empty( trim( $show_info['name'] ) ) ) {
+					$title = 'Next <em>' . $show_info['name'] . '</em> Episode';
+				}
+
 				if ( isset( $show_info['_links']['nextepisode']['href'] ) ) {
+
 					$next_get = wp_remote_get( $show_info['_links']['nextepisode']['href'] );
+
 					if ( is_array( $next_get ) && ! is_wp_error( $next_get ) ) {
 						$next_info = json_decode( $next_get['body'], true );
 
 						$next_date_time   = DateTime::createFromFormat( 'Y-m-d', $next_info['airdate'] );
 						$next_date_string = $next_date_time->format( 'M d, Y' );
 
-						$content = '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string . '</p>';
+						$content = '<p><strong>' . $next_info['name'] . '</strong><br />Episode ' . $next_info['season'] . 'x' . $next_info['number'] . '; ' . $next_date_string;
 
 						if ( isset( $next_info['summary'] ) ) {
-							$content = '<small>' . $next_info['summary'] . '</small>';
+							$content .= ' <small>' . $next_info['summary'] . '</small>';
 						}
 
-						$content .= '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">More <em>' . $show_info['name'] . '</em> Episodes</a><br /><small><a href="' . $url . '">Powered by TV Maze</a></small>';
+						$content .= '</p>';
+
+						$content .= '<p><a href="https://jorjafox.net/library/actor/' . $slug . '-episodes">More <em>' . $show_info['name'] . '</em> Episodes</a><br /><small><a href="' . $url . '">Powered by TV Maze</a></small>';
 					}
 				}
 			}
 		}
+
+		$widget_title = '<h2 class="widget-title">' . $title . '</h2>';
 
 		if ( ! isset( $content ) ) {
 			$content = ( isset( $slug ) ) ? '<p><a href="https://jorjafox.net/library/actor/' . $slug . '">Coming soon...</a></p>' : '<p>Coming soon...</p>';
