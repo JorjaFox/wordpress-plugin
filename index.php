@@ -94,5 +94,6 @@ new FLF_MU_Plugins();
 
 // Require the add-ons
 require_once 'blocks/_main.php';
+require_once 'comments/_main.php';
 require_once 'cpts/videos.php';
 require_once 'features/_main.php';

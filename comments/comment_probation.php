@@ -6,7 +6,7 @@
  * Since Nacin's not updating this, we're going to take over.
  */
 
-class Plugin_Comment_Probation {
+class FLF_Comment_Probation {
 
 	const META_KEY = '_comment_probation';
 	public static $instance;
@@ -34,27 +34,28 @@ class Plugin_Comment_Probation {
 	}
 
 	public function gettext( $translated, $original, $domain ) {
-		if ( 'Comment author must have a previously approved comment' != $original ) {
+		if ( 'Comment author must have a previously approved comment' !== $original ) {
 			return $translated;
 		}
 
+		// translators: %s is the URL to the comment options page.
 		return sprintf( __( 'Comment author must have a previously approved comment (<a href="%s">and not be on probation</a>)', 'comment-probation' ), network_admin_url( 'plugins.php' ) . '#comment-probation' );
 	}
 
 	public function wp_set_comment_status( $comment_id, $status ) {
 		global $wpdb;
-		if ( '1' != $status && 'approve' != $status ) {
+		if ( '1' !== $status && 'approve' !== $status ) {
 			return;
 		}
 
-		if ( ! empty( $_POST['probation'] ) ) {
+		if ( ! empty( $_POST['probation'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			update_comment_meta( $comment_id, self::META_KEY, '1' );
 		} else {
 			$commentdata = get_comment( $comment_id );
-			$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_author = %s AND comment_author_email = %s AND comment_approved = '1'",
-                     $commentdata->comment_author, $commentdata->comment_author_email ) );
-			foreach ( $comment_ids as $comment_id )
+			$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_author = %s AND comment_author_email = %s AND comment_approved = '1'", $commentdata->comment_author, $commentdata->comment_author_email ) );
+			foreach ( $comment_ids as $comment_id ) {
 				delete_comment_meta( $comment_id, self::META_KEY );
+			}
 		}
 	}
 
@@ -66,7 +67,7 @@ class Plugin_Comment_Probation {
 		global $wpdb;
 
 		// If we're not approving the comment, keep going.
-		if ( 1 != $approved ) {
+		if ( 1 !== $approved ) {
 			return $approved;
 		}
 
@@ -76,18 +77,15 @@ class Plugin_Comment_Probation {
 		}
 
 		// The only other situation is check_comment() returning true.
-		$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments
-			WHERE comment_author = %s AND comment_author_email = %s AND comment_approved = '1'",
-			$commentdata['comment_author'], $commentdata['comment_author_email'] ) );
+		$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_author = %s AND comment_author_email = %s AND comment_approved = '1'", $commentdata['comment_author'], $commentdata['comment_author_email'] ) );
 
 		// This shouldn't happen...
 		if ( ! $comment_ids ) {
-			return 0; // or return $approved?
+			return 0; // alt $approved maybe? Hard to know.
 		}
 
 		$comment_ids = implode( ', ', $comment_ids );
-		$commentmeta = $wpdb->get_var( $wpdb->prepare( "SELECT meta_id FROM $wpdb->commentmeta
-			WHERE comment_id IN ($comment_ids) AND META_KEY = %s LIMIT 1", self::META_KEY ) );
+		$commentmeta = $wpdb->get_var( $wpdb->prepare( "SELECT meta_id FROM $wpdb->commentmeta WHERE comment_id IN ($comment_ids) AND META_KEY = %s LIMIT 1", self::META_KEY ) ); //phpcs:ignore WordPress.DB
 
 		// This user is on probation. Tsk tsk.
 		if ( $commentmeta ) {
@@ -109,7 +107,7 @@ class Plugin_Comment_Probation {
 
 		$probation = str_replace( 'action=approvecomment', 'action=approvecomment&amp;probation=1', $actions['approve'] );
 		preg_match( '/^(.*?>)/', $probation, $matches );
-		$probation = str_replace( array( ':new=approved', ' vim-a' ), array( ':new=approved&probation=1', '' ), $matches[1] );
+		$probation  = str_replace( array( ':new=approved', ' vim-a' ), array( ':new=approved&probation=1', '' ), $matches[1] );
 		$probation .= __( 'Approve with Probation', 'comment-probation' ) . '</a>';
 
 		$actions['approve'] .= '<span class="comment-probation"> | ' . $probation . '</span>';
@@ -119,4 +117,4 @@ class Plugin_Comment_Probation {
 
 }
 
-new Plugin_Comment_Probation();
+new FLF_Comment_Probation();
