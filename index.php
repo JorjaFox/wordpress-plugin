@@ -3,7 +3,7 @@
 Plugin Name: Fans of LeFox Functions
 Plugin URI: https://jorjafox.net/
 Description: Instead of putting it all in my functions.php, I've made a plugin.
-Version: 2.0
+Version: 2.1
 Author: Mika Epstein
 */
 
