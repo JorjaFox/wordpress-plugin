@@ -18,6 +18,8 @@
 ### Features (`features`)
 
 - `comment-probation.php` - Fork of abandoned plugin
+- `jetpack.php` - Remove Jetpack's External Media feature
+- `oembed.php` - Force oEmbed to behave with a self hosted NPG install
 - `shortcodes.php` - custom shortcodes and embeds
 - `tvmaze.php` - Widget to display next episode of a TV show.
 - `upgrades.php` - Auto upgrade all the things
