@@ -15,10 +15,20 @@ class FLF_Oembed {
 	}
 
 	public static function wrap_oembed_html( $cached_html, $url, $attr, $post_id ) {
+		// If FLF Gallery:
 		if ( false !== strpos( $url, '://jorjafox.net/gallery' ) ) {
 			$cached_html = '<div class="responsive-check">' . $cached_html . '</div>';
 
 			$cached_html = str_replace( 'wp-embedded-content', 'npg-embedded-content', $cached_html );
+			$cached_html = str_replace( 'sandbox="allow-scripts"', '', $cached_html );
+			$cached_html = str_replace( 'security="restricted"', '', $cached_html );
+
+		}
+		// If The Library:
+		if ( false !== strpos( $url, '://jorjafox.net/library' ) ) {
+			$cached_html = '<div class="responsive-check">' . $cached_html . '</div>';
+
+			$cached_html = str_replace( 'wp-embedded-content', 'hugo-embedded-content', $cached_html );
 			$cached_html = str_replace( 'sandbox="allow-scripts"', '', $cached_html );
 			$cached_html = str_replace( 'security="restricted"', '', $cached_html );
 
