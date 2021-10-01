@@ -22,7 +22,6 @@ class FLF_Oembed {
 			$cached_html = str_replace( 'wp-embedded-content', 'npg-embedded-content', $cached_html );
 			$cached_html = str_replace( 'sandbox="allow-scripts"', '', $cached_html );
 			$cached_html = str_replace( 'security="restricted"', '', $cached_html );
-
 		}
 		// If The Library:
 		if ( false !== strpos( $url, '://jorjafox.net/library' ) ) {
@@ -31,7 +30,7 @@ class FLF_Oembed {
 			$cached_html = str_replace( 'wp-embedded-content', 'hugo-embedded-content', $cached_html );
 			$cached_html = str_replace( 'sandbox="allow-scripts"', '', $cached_html );
 			$cached_html = str_replace( 'security="restricted"', '', $cached_html );
-
+			$cached_html = str_replace( 'height="338"', 'height="300"', $cached_html );
 		}
 		return $cached_html;
 	}
