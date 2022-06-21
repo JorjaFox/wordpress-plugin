@@ -68,7 +68,7 @@ class FLF_Videos {
 
 		// we use this cache key for our metadata because WP itself handles clearing
 		// it on post saves as part of oembed
-		$cachekey = '_oembed_' . md5( $url . serialize( $attr ) );
+		$cachekey = '_oembed_' . md5( $url . serialize( $attr ) ); // phpcs:ignore
 
 		$ret = get_post_meta( $post->ID, $cachekey, true );
 
@@ -137,7 +137,7 @@ class FLF_Videos {
 		</object>
 		<p>Source: <a href='" . $url . "'>CBS Video</a></p>";
 
-		// cache, and return
+		// store in cache, and return
 		update_post_meta( $post->ID, $cachekey, $ret );
 		return $ret;
 	}
@@ -149,19 +149,22 @@ class FLF_Videos {
 	 * Example: [ooyala video_pcode="VlajQ6DTdv9-OYPHSJq6w4eU0Bfi" width="222" embedCode="NwdzM3aDp4BB3-MEdPemlMJK5XH7ZVdn"]
 	 */
 	public function ooyala_shortcode( $atts ) {
-		extract( shortcode_atts(
+		$attributes = shortcode_atts(
 			array(
 				'width'       => '500',
 				'video_pcode' => '',
 				'embedcode'   => '',
-			), $atts
-		));
+			),
+			$atts
+		);
 
-		$width  = (int) $width;
-		$height = floor( $width * 9 / 16 );
+		$width       = (int) $attributes['width'];
+		$height      = floor( $width * 9 / 16 );
+		$video_pcode = sanitize_text_field( $attributes['video_pcode'] );
+		$embedcode   = sanitize_text_field( $attributes['embedcode'] );
 
 		if ( ! is_feed() ) {
-			$output = '<script src="http://player.ooyala.com/player.js?video_pcode=' . $video_pcode . '&width=' . $width . '&deepLinkEmbedCode=' . $embedcode . '&height=' . $height . '&embedCode=' . $embedcode . '"></script>';
+			$output = '<script src="http://player.ooyala.com/player.js?video_pcode=' . $video_pcode . '&width=' . $width . '&deepLinkEmbedCode=' . $embedcode . '&height=' . $height . '&embedCode=' . $embedcode . '"></script>'; // phpcs:ignore
 		} elseif ( $options['show_in_feed'] ) {
 			$output = __( '[There is a video that cannot be displayed in this feed. ', 'ooyalavideo' ) . '<a href="' . get_permalink() . '">' . __( 'Visit the blog entry to see the video.]', 'ooyalavideo' ) . '</a>';
 		}

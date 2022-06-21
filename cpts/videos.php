@@ -15,7 +15,6 @@ class FLF_CPT_Videos {
 	 */
 	public function __construct() {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
-
 		add_action( 'init', array( $this, 'create_post_type' ), 0 );
 		add_action( 'init', array( $this, 'create_taxonomies' ), 0 );
 	}
@@ -156,10 +155,11 @@ class FLF_CPT_Videos {
 			$num_posts = wp_count_posts( $post_type );
 			if ( $num_posts && $num_posts->publish ) {
 				if ( 'videos' === $post_type ) {
+					// Translators: %s is numer of videos
 					$text = _n( '%s Video', '%s Videos', $num_posts->publish );
 				}
 				$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
-				printf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', $post_type, $text );
+				printf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', esc_attr( $post_type ), esc_html( $text ) );
 			}
 		}
 	}

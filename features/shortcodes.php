@@ -24,10 +24,15 @@ class FLF_Shortcodes {
 	 * @return void
 	 */
 	public function crowdrise( $atts ) {
-		extract( shortcode_atts( array(
-			'id' => 'stupidcancer',
-		), $atts ) );
-		return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/' . $id . '/"></script>';
+		$attributes = shortcode_atts(
+			array(
+				'id' => 'stupidcancer',
+			),
+			$atts
+		);
+
+		$id = sanitize_text_field( $attributes['id'] );
+		return '<script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/' . $id . '/"></script>'; // phpcs:ignore
 	}
 
 	/**
@@ -37,7 +42,7 @@ class FLF_Shortcodes {
 	 * @return void
 	 */
 	public function year() {
-		$year = date( 'Y' );
+		$year = gmdate( 'Y' );
 		return $year;
 	}
 
