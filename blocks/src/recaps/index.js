@@ -220,7 +220,7 @@ registerBlockType( 'flfblocks/recap', {
 						class='card-text'
 					/>
 					<DisplayRecap link={ recaplink } />&nbsp;
-                    <DisplayGallery link={ gallerylink } count={ gallerycount } />
+					<DisplayGallery link={ gallerylink } count={ gallerycount } />
 				</div>
 			</div>
 			</Fragment>
